@@ -9,6 +9,7 @@ class Enclosure < ActiveRecord::Base
   belongs_to :format
   belongs_to :carousel
   belongs_to :ocr
+  belongs_to :ctg_mtrl
 end
 
 # == Schema Information

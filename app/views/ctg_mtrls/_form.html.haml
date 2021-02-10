@@ -1,0 +1,58 @@
+.container-fluid
+  .row.justify-content-sm-center
+    .col-sm-12
+      = form_for @ctg_mtrl, :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
+        - if @ctg_mtrl.errors.any?
+          #error_explanation.alert.alert-danger.alert-dismissible.fade.show
+            %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+              %span{"aria-hidden" => "true"} x 
+            %h2= "#{pluralize(@ctg_mtrl.errors.count, "error")} prohibited this buyer from being saved:"
+            %ul
+              - @ctg_mtrl.errors.full_messages.each do |msg|
+                %li= msg
+      
+        .form-group.row
+          = f.label '所属类目', :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = select_tag "ctg_secd", options_for_ctg(@ctg_mtrl.ctg_secd), :class=>"form-control", :required => true
+
+        .form-group.row
+          = f.label Setting.ctg_mtrls.idno, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :idno, :class => "form-control rounded-0" , :required => true
+          
+        .form-group.row
+          = f.label Setting.ctg_mtrls.name, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :name, :class => "form-control rounded-0" , :required => true
+          
+        .form-group.row
+          = f.label Setting.ctg_mtrls.pet_name, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :pet_name, :class => "form-control rounded-0" 
+          
+        .form-group.row
+          = f.label Setting.ctg_mtrls.model_no, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :model_no, :class => "form-control rounded-0" 
+          
+      
+      
+      
+        .form-group.row
+          = f.label "附图", :class => "col-3 text-right col-form-label col-form-label"
+          .col-9
+            .row
+              = f.fields_for :enclosures do |enclosure|
+                = render 'enclosure_fields', f: enclosure
+              .links
+                = link_to_add_association "添加文件", f, :enclosures, :class => "button button-primary"
+      
+      
+      
+        .form-group.row
+          .col-3.offset-3
+            = f.submit '保存', :class => "button button-action"
+        -#
+          .col-3.offset-1
+            = link_to '返回', ctg_mtrls_path, :class => "button button-caution"

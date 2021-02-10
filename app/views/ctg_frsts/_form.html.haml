@@ -1,0 +1,38 @@
+.container-fluid
+  .row.justify-content-sm-center
+    .col-sm-12
+      = form_for @ctg_frst, :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
+        - if @ctg_frst.errors.any?
+          #error_explanation.alert.alert-danger.alert-dismissible.fade.show
+            %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+              %span{"aria-hidden" => "true"} x 
+            %h2= "#{pluralize(@ctg_frst.errors.count, "error")} prohibited this buyer from being saved:"
+            %ul
+              - @ctg_frst.errors.full_messages.each do |msg|
+                %li= msg
+      
+        .form-group.row
+          = f.label Setting.ctg_frsts.name, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :name, :class => "form-control rounded-0" , :required => true
+          
+      
+      
+      
+      
+      
+        .form-group.row
+          = f.label Setting.ctg_secds.label, :class => "col-3  text-right col-form-label"
+          .col-9
+            .row
+              = f.fields_for :ctg_secds do |ctg_secd|
+                = render 'ctg_secd_fields', f: ctg_secd 
+              .links
+                = link_to_add_association "添加", f, :ctg_secds, :class => "button button-primary"
+      
+        .form-group.row
+          .col-3.offset-3
+            = f.submit '保存', :class => "button button-action"
+        -#
+          .col-3.offset-1
+            = link_to '返回', ctg_frsts_path, :class => "button button-caution"

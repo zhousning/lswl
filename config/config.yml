@@ -1,6 +1,6 @@
 ---
 mysetting:
-  wares: &1
+  wares: &2
     label: ''
     name: 名字
   reports: &3
@@ -1109,7 +1109,7 @@ defaults:
     btn_show: 详情
     btn_delete: 删除
     btn_save: 保存
-    company_name: 梁山水务极简办公系统
+    company_name: 梁山水务方圆物料管理系统
     nav_item1: 首页
     nav_item2: 招标公告
     nav_item3: 中标公告
@@ -1262,13 +1262,13 @@ defaults:
     ed_cf: 二档处罚(80<=回收率<90)
     sd_cf: 三档处罚(回收率<80)
     zg_cf: 最高处罚
-  notices: &138
+  notices: &1
     label: 通知公告
     title: 标题
     content: 内容
 development:
-  notices: *138
-  wares: *1
+  notices: *1
+  wares: *2
   reports: *3
   models: *4
   properties: *5
@@ -1404,6 +1404,18 @@ development:
   agendas: *135
   statistics: *136
   meter_standards: *137
+  ctg_mtrls:
+    label: 材料分类
+    idno: 编号
+    name: 名称
+    pet_name: 别名或其他名
+    model_no: 型号
+  ctg_secds:
+    label: 二级类目
+    name: 名称
+  ctg_frsts:
+    label: 一级分类
+    name: 名称
 test:
   admins: *106
   users: *107
@@ -1414,7 +1426,7 @@ test:
   wares: *128
   trees: *112
   leafs: *113
-  notices: *138
+  notices: *1
   orders: *114
   accounts: *115
   consumes: *116
@@ -1441,7 +1453,7 @@ test:
   meter_standards: *137
 production:
   wares: *128
-  notices: *138
+  notices: *1
   reports: *3
   models: *4
   properties: *5

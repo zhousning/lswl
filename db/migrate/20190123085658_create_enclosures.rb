@@ -10,6 +10,7 @@ class CreateEnclosures < ActiveRecord::Migration
       t.references :page
       t.references :format
       t.references :ocr
+      t.references :ctg_mtrl
     end
   end
 end

@@ -1,6 +1,10 @@
 .card.border-0.rounded-0
   .card-body.p-0
     %ul.list-group.list-group-flush.sidebar-lists
+      = link_to ctg_frsts_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/ctg_frst/ =~ request.path).nil? ? '' : 'text-danger' }" do
+        = fa_icon "diamond", text: "类目管理", class: "ml-4 mr-2"
+      = link_to ctg_mtrls_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/ctg_mtrl/ =~ request.path).nil? ? '' : 'text-danger' }" do
+        = fa_icon "diamond", text: "材料类目", class: "ml-4 mr-2"
       = link_to ocrs_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/ocr/ =~ request.path).nil? ? '' : 'text-danger' }" do
         = fa_icon "diamond", text: "AI工具箱", class: "ml-4 mr-2"
       = link_to statistics_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/statistic/ =~ request.path).nil? ? '' : 'text-danger' }" do
