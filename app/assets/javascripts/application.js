@@ -22,8 +22,8 @@
 //= require kindeditor
 //= require Chart.bundle 
 //= require chartkick 
-//= require select2
 //= require dropzone
-//= require select2_locale_zh-CN
 //= require_tree .
+//= require select2
+//= require select2_locale_zh-CN
 

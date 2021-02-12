@@ -109,6 +109,10 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :input_items, :only => [] do
+    get :category, :on => :collection
+  end
   resources :ware_houses do
     resources :input_items do
     end

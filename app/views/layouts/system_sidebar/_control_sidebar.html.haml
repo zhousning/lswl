@@ -4,7 +4,7 @@
       = link_to ctg_frsts_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/ctg_frst/ =~ request.path).nil? ? '' : 'text-danger' }" do
         = fa_icon "diamond", text: "类目管理", class: "ml-4 mr-2"
       = link_to list_ctg_mtrls_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/ctg_mtrl/ =~ request.path).nil? ? '' : 'text-danger' }" do
-        = fa_icon "diamond", text: "材料类目", class: "ml-4 mr-2"
+        = fa_icon "diamond", text: "物品名录", class: "ml-4 mr-2"
       = link_to ware_houses_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/ware_house/ =~ request.path).nil? ? '' : 'text-danger' }" do
         = fa_icon "diamond", text: "入库", class: "ml-4 mr-2"
       = link_to ocrs_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/ocr/ =~ request.path).nil? ? '' : 'text-danger' }" do

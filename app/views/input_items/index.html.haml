@@ -18,7 +18,8 @@
                 %thead
                   %tr
                     %th{:scope => "col"} #
-                  
+                    %th{:scope => "col"}
+                      名称
                     %th{:scope => "col"}
                       = Setting.input_items.unit_price
                     %th{:scope => "col"}
@@ -33,6 +34,9 @@
                       %td{:scope => "row"}
                         = index+1
                     
+                      %td
+                        - if input_item.ctg_mtrl
+                          = input_item.ctg_mtrl.name
                       %td
                         = input_item.unit_price
                       %td

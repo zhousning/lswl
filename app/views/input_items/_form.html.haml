@@ -10,18 +10,23 @@
             %ul
               - @input_item.errors.full_messages.each do |msg|
                 %li= msg
+        .form-group.row
+          = f.label '物品名称', :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = select_tag "ctg_mtrl", nil, :class=>"form-control", :style => "width: 100%", :required => true
       
         .form-group.row
           = f.label Setting.input_items.unit_price, :class => "col-sm-3 col-form-label text-right"
           .col-sm-6
-            = f.number_field :unit_price, :class => "form-control rounded-0" , :required => true
+            = f.number_field :unit_price, :class => "form-control rounded-0"
           
         .form-group.row
           = f.label Setting.input_items.count, :class => "col-sm-3 col-form-label text-right"
           .col-sm-6
-            = f.number_field :count, :class => "form-control rounded-0" , :required => true
+            = f.number_field :count, :class => "form-control rounded-0"
           
-        .form-group.row
+        -#
+          .form-group.row
           = f.label Setting.input_items.total_price, :class => "col-sm-3 col-form-label text-right"
           .col-sm-6
             = f.number_field :total_price, :class => "form-control rounded-0" , :required => true
