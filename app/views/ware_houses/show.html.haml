@@ -16,18 +16,17 @@
               .card-body
                 .container-fluid
                   .row
+                    .col-md-6.mb-3.mr-3
+                      = Setting.ware_houses.name
+                      = @ware_house.name
                   
                     .col-md-6.mb-3.mr-3
-                      = Setting.ctg_secds.name
-                      = @ctg_secd.name
+                      = Setting.ware_houses.ware_date
+                      = @ware_house.ware_date
                   
-                  .row
+                    .col-md-6.mb-3.mr-3
+                      = Setting.ware_houses.desc
+                      = @ware_house.desc
                   
-                  .row
-                  
-                  .row
-                  
-                  
-                  .row
                   
       = render "layouts/bootstrap/card"

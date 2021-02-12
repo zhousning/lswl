@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :consumes
   has_many :orders
   has_many :statistics
+  has_many :ware_houses
   has_many :ctg_frsts
 
   belongs_to :role

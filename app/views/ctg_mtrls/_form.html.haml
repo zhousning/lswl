@@ -1,7 +1,7 @@
 .container-fluid
   .row.justify-content-sm-center
     .col-sm-12
-      = form_for @ctg_mtrl, :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
+      = form_for [@ctg_frst, @ctg_secd, @ctg_mtrl], :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
         - if @ctg_mtrl.errors.any?
           #error_explanation.alert.alert-danger.alert-dismissible.fade.show
             %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
@@ -11,10 +11,11 @@
               - @ctg_mtrl.errors.full_messages.each do |msg|
                 %li= msg
       
-        .form-group.row
-          = f.label '所属类目', :class => "col-sm-3 col-form-label text-right"
-          .col-sm-6
-            = select_tag "ctg_secd", options_for_ctg(@ctg_mtrl.ctg_secd), :class=>"form-control", :required => true
+        -#
+          .form-group.row
+            = f.label '所属类目', :class => "col-sm-3 col-form-label text-right"
+            .col-sm-6
+              = select_tag "ctg_secd", options_for_ctg(@ctg_mtrl.ctg_secd), :class=>"form-control", :required => true
 
         .form-group.row
           = f.label Setting.ctg_mtrls.idno, :class => "col-sm-3 col-form-label text-right"

@@ -100,14 +100,18 @@ Rails.application.routes.draw do
   end
   resources :selectors
 
-  resources :ctg_mtrls do
-    get :download_append, :on => :member
-  end
-  resources :ctg_secds do
-    get :download_append, :on => :member
+  resources :ctg_mtrls, :only => [] do
+    get :list, :on => :collection
   end
   resources :ctg_frsts do
-    get :download_append, :on => :member
+    resources :ctg_secds do
+      resources :ctg_mtrls do
+      end
+    end
+  end
+  resources :ware_houses do
+    resources :input_items do
+    end
   end
   resources :flower
 

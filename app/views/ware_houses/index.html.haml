@@ -20,21 +20,30 @@
                     %th{:scope => "col"} #
                   
                     %th{:scope => "col"}
-                      = Setting.ctg_secds.name
+                      = Setting.ware_houses.name
+                    %th{:scope => "col"}
+                      = Setting.ware_houses.ware_date
+                    %th{:scope => "col"}
+                      = Setting.ware_houses.desc
                     %th{:scope => "col"}
                       设置
                 %tbody
-                  - @ctg_secds.each_with_index do |ctg_secd, index|
+                  - @ware_houses.each_with_index do |ware_house, index|
                     %tr
                       %td{:scope => "row"}
                         = index+1
                     
                       %td
-                        = ctg_secd.name
+                        = ware_house.name
+                      %td
+                        = ware_house.ware_date
+                      %td
+                        = ware_house.desc
                       %td
                         .container-fluid
                           .row.justify-content-center
-                            = link_to "编辑", edit_ctg_secd_path(ctg_secd), :class => "button button-highlight button-small mr-1" 
-                            = link_to "详细",  ctg_secd_path(ctg_secd), :class => "button button-primary button-small mr-1" 
-                            = link_to "删除",  ctg_secd, :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
+                            = link_to "编辑", edit_ware_house_path(ware_house), :class => "button button-highlight button-small mr-1" 
+                            = link_to "入库", ware_house_input_items_path(ware_house), :class => "button button-royal button-small mr-1" 
+                            = link_to "详细",  ware_house_path(ware_house), :class => "button button-primary button-small mr-1" 
+                            = link_to "删除",  ware_house, :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
       = render "layouts/bootstrap/card"

@@ -7,7 +7,7 @@
       - content_for :card_header do
         %h5
           = fa_icon "plus-square-o", text: t(controller_name + "." + action_name + '.title')
-          = link_to "/ctg_frsts/#{@ctg_frst.id}/ctg_secds/#{@ctg_secd.id}/ctg_mtrls", :class => "button pull-right button-primary" do
+          = link_to ware_house_input_items_path(@ware_house), :class => "button pull-right button-primary" do
             = fa_icon " chevron-left", text: Setting.systems.btn_back, right: false 
 
       - content_for :card_body do

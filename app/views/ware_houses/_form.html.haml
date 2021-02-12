@@ -1,0 +1,39 @@
+.container-fluid
+  .row.justify-content-sm-center
+    .col-sm-12
+      = form_for @ware_house, :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
+        - if @ware_house.errors.any?
+          #error_explanation.alert.alert-danger.alert-dismissible.fade.show
+            %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+              %span{"aria-hidden" => "true"} x 
+            %h2= "#{pluralize(@ware_house.errors.count, "error")} prohibited this buyer from being saved:"
+            %ul
+              - @ware_house.errors.full_messages.each do |msg|
+                %li= msg
+
+        .form-group.row
+          = f.label Setting.ware_houses.name, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :name, :class => "form-control rounded-0" , :required => true
+      
+        .form-group.row
+          = f.label Setting.ware_houses.ware_date, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.date_field :ware_date, :class => "form-control rounded-0" , :required => true
+          
+        .form-group.row
+          = f.label Setting.ware_houses.desc, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_area :desc, :class => "form-control rounded-0" , :required => true, :rows => "20"
+          
+      
+      
+      
+      
+      
+        .form-group.row
+          .col-3.offset-3
+            = f.submit '保存', :class => "button button-action"
+        -#
+          .col-3.offset-1
+            = link_to '返回', ware_houses_path, :class => "button button-caution"

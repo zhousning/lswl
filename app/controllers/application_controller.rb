@@ -108,4 +108,5 @@ class ApplicationController < ActionController::Base
     def convert_to_md5(value)
       Digest::MD5.hexdigest(value) unless value.blank?
     end
+
 end

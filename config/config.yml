@@ -1416,6 +1416,16 @@ development:
   ctg_frsts:
     label: 一级分类
     name: 名称
+  ware_houses:
+    label: 入库
+    name: 入库名称
+    ware_date: 时间
+    desc: 备注
+  input_items:
+    label: 入库项目
+    unit_price: 单价
+    count: 数量
+    total_price: 总价
 test:
   admins: *106
   users: *107

@@ -1,22 +1,22 @@
 module CtgMtrlsHelper
 
-  def options_for_ctg(my_secd)
-    ctg_frsts = current_user.ctg_frsts
-    str = ""
-    ctg_frsts.each do |frst|
-      str += " <optgroup label='#{frst.name}'>"
-      ctg_secds = frst.ctg_secds
-      ctg_secds.each do |secd|
-        if !secd.nil? && secd.id == my_secd.id
-          str += " <option selected='selected' value='#{secd.id}'>#{secd.name}</option>"
-        else
-          str += " <option value='#{secd.id}'>#{secd.name}</option>"
-        end
-      end
-      str += "</optgroup>"
-    end
-    raw(str)
-  end                                            
+  #def options_for_ctg(my_secd)
+  #  ctg_frsts = current_user.ctg_frsts
+  #  str = ""
+  #  ctg_frsts.each do |frst|
+  #    str += " <optgroup label='#{frst.name}'>"
+  #    ctg_secds = frst.ctg_secds
+  #    ctg_secds.each do |secd|
+  #      if !secd.nil? && secd.id == my_secd.id
+  #        str += " <option selected='selected' value='#{secd.id}'>#{secd.name}</option>"
+  #      else
+  #        str += " <option value='#{secd.id}'>#{secd.name}</option>"
+  #      end
+  #    end
+  #    str += "</optgroup>"
+  #  end
+  #  raw(str)
+  #end                                            
 
   def options_for_domain_level(level) 
     levels = [Setting.domains.level_one, Setting.domains.level_two, Setting.domains.level_three]
