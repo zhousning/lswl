@@ -4,7 +4,7 @@ class CreateInputItems < ActiveRecord::Migration
     
       t.float :unit_price,  null: false, default: Setting.systems.default_num 
     
-      t.float :count,  null: false, default: Setting.systems.default_num 
+      t.integer :count,  null: false, default: Setting.systems.default_num 
     
       t.float :total_price,  null: false, default: Setting.systems.default_num 
     

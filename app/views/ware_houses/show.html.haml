@@ -7,26 +7,68 @@
       - content_for :card_header do
         %h5
           = fa_icon "newspaper-o", text: t(controller_name + "." + action_name + '.title')
-          = link_to "/#{controller_name}", :class => "button pull-right button-primary" do
-            = fa_icon " chevron-left", text: Setting.systems.btn_back, right: false 
+          - if @ware_house.state != Setting.ware_houses.completed && @ware_house.state != Setting.ware_houses.canceled 
+            = link_to canceled_ware_house_path(@ware_house), :data => {:confirm => "作废后不允许再修改，确定作废吗?"}, :class => "button pull-right button-small button-caution mr-1" do
+              = fa_icon "trash-o", text: "作废", right: false 
+            = link_to completed_ware_house_path(@ware_house), :data => {:confirm => "入库后不允许再修改，确认入库吗?"}, :class => "button pull-right button-small button-royal mr-1" do
+              = fa_icon "bank", text: "入库", right: false 
+          = link_to "/#{controller_name}", :class => "button pull-right button-primary button-small mr-1" do
+            = fa_icon " chevron-left", text: Setting.systems.btn_back, right: false
       - content_for :card_body do
-        .container-fluid
+        .container-fluid.mb-5
           .row
             .col-md-8.offset-2
-              .card-body
+              .card-body.mb-5
                 .container-fluid
                   .row
-                    .col-md-6.mb-3.mr-3
-                      = Setting.ware_houses.name
-                      = @ware_house.name
-                  
-                    .col-md-6.mb-3.mr-3
-                      = Setting.ware_houses.ware_date
-                      = @ware_house.ware_date
-                  
-                    .col-md-6.mb-3.mr-3
-                      = Setting.ware_houses.desc
-                      = @ware_house.desc
+                    .col-sm-12
+                      %h2.text-center
+                        = @ware_house.name
+                        = "入库单" 
+                    .col-sm-6
+                      %p.text-left
+                        = "填写人："
+                        = @ware_house.sign
+                    .col-sm-6
+                      %p.text-right
+                        = @ware_house.ware_date.strftime('%Y 年 %m 月 %d 日')
+                  .row
+                    .col-sm-12
+                      %table.text-center.table.table-bordered
+                        %thead
+                          %tr
+                            %th{:scope => "col"} #
+                            %th.w-75{:scope => "col"}
+                              名称
+                            %th{:scope => "col"}
+                              = Setting.input_items.unit_price
+                            %th{:scope => "col"}
+                              = Setting.input_items.count
+                            %th{:scope => "col"}
+                              = Setting.input_items.total_price
+                        %tbody
+                          - @input_items.each_with_index do |input_item, index|
+                            %tr
+                              %td{:scope => "row"}
+                                = index+1
+                            
+                              %td
+                                - if input_item.ctg_mtrl
+                                  = input_item.ctg_mtrl.name
+                              %td
+                                = input_item.unit_price
+                              %td
+                                = input_item.count
+                              %td
+                                = input_item.total_price
+                  .row
+                    .offset-10.col-sm-2
+                      - if @ware_house.state == Setting.ware_houses.completed
+                        %h2.text-success.text-center.border.border-success
+                          已入库
+                      - elsif @ware_house.state == Setting.ware_houses.canceled
+                        %h2.text-danger.text-center.border.border-danger
+                          已作废
                   
                   
       = render "layouts/bootstrap/card"

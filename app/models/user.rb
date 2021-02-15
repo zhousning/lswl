@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :statistics
   has_many :ware_houses
   has_many :ctg_frsts
+  has_many :stocks
+  has_many :retrievals
 
   belongs_to :role
 

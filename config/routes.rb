@@ -112,9 +112,20 @@ Rails.application.routes.draw do
 
   resources :input_items, :only => [] do
     get :category, :on => :collection
+    get :ware_item, :on => :collection
   end
   resources :ware_houses do
+    get :completed, :on => :member
+    get :canceled, :on => :member
     resources :input_items do
+    end
+  end
+  resources :stocks do
+    get :download_append, :on => :member
+  end
+  resources :retrievals do
+    get :download_append, :on => :member
+    resources :output_items do
     end
   end
   resources :flower

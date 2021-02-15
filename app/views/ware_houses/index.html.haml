@@ -7,9 +7,9 @@
     %main.col-md-9.ml-sm-auto.col-lg-10.p-3{:role => "main"}
       - content_for :card_header do
         %h5
-          = fa_icon "list", text: t(controller_name + "." + action_name + '.title')
+          = fa_icon "list", text: "入库单" 
           = link_to "/#{controller_name}/new", :class => "button pull-right button-primary" do
-            = fa_icon "plus", text: Setting.systems.btn_new, right: false 
+            = fa_icon "plus", text: "创建入库单", right: false 
       - content_for :card_body do
         .container-fluid
           .row
@@ -24,7 +24,9 @@
                     %th{:scope => "col"}
                       = Setting.ware_houses.ware_date
                     %th{:scope => "col"}
-                      = Setting.ware_houses.desc
+                      = Setting.ware_houses.sign
+                    %th{:scope => "col"}
+                      进度
                     %th{:scope => "col"}
                       设置
                 %tbody
@@ -38,12 +40,25 @@
                       %td
                         = ware_house.ware_date
                       %td
-                        = ware_house.desc
+                        = ware_house.sign
+                      %td
+                        - if ware_house.state == Setting.ware_houses.opening
+                          = "入库单已创建"
+                        - elsif ware_house.state == Setting.ware_houses.uploading
+                          = "填写物品明细"
+                        - elsif ware_house.state == Setting.ware_houses.uploaded
+                          = "待入库"
+                        - elsif ware_house.state == Setting.ware_houses.completed
+                          = "已入库"
+                        - elsif ware_house.state == Setting.ware_houses.canceled
+                          = "已作废"
                       %td
                         .container-fluid
                           .row.justify-content-center
-                            = link_to "编辑", edit_ware_house_path(ware_house), :class => "button button-highlight button-small mr-1" 
-                            = link_to "入库", ware_house_input_items_path(ware_house), :class => "button button-royal button-small mr-1" 
+                            - if ware_house.state != Setting.ware_houses.completed and ware_house.state != Setting.ware_houses.canceled
+                              = link_to "填写", edit_ware_house_path(ware_house), :class => "button button-highlight button-small mr-1" 
                             = link_to "详细",  ware_house_path(ware_house), :class => "button button-primary button-small mr-1" 
-                            = link_to "删除",  ware_house, :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
+                            -#
+                              = link_to "入库", ware_house_input_items_path(ware_house), :class => "button button-royal button-small mr-1" 
+                              = link_to "删除",  ware_house, :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
       = render "layouts/bootstrap/card"

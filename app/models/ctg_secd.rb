@@ -13,3 +13,15 @@ class CtgSecd < ActiveRecord::Base
 
 
 end
+
+# == Schema Information
+#
+# Table name: ctg_secds
+#
+#  id          :integer         not null, primary key
+#  name        :string          default(""), not null
+#  ctg_frst_id :integer
+#  created_at  :datetime        not null
+#  updated_at  :datetime        not null
+#
+

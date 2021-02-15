@@ -1419,13 +1419,32 @@ development:
   ware_houses:
     label: 入库
     name: 入库名称
+    sign: 填写人
     ware_date: 时间
     desc: 备注
+    opening: "opening"
+    uploading: "uploading"
+    uploaded: "uploaded"
+    completed: "completed"
+    canceled: "canceled" 
   input_items:
     label: 入库项目
     unit_price: 单价
     count: 数量
     total_price: 总价
+  stocks:
+    label: 库存
+    count: 数量
+    position: 位置
+  retrievals:
+    label: 出库
+    name: 名称
+    outdate: 出库日期
+    dept: 部门
+    receiver: 领取人
+  output_items:
+    label: 出库项目
+    count: 数量
 test:
   admins: *106
   users: *107

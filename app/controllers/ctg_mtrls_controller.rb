@@ -74,7 +74,7 @@ class CtgMtrlsController < ApplicationController
     @ctg_secd = @ctg_frst.ctg_secds.find(params[:ctg_secd_id])
     @ctg_mtrl = @ctg_secd.ctg_mtrls.find(params[:id])
     if @ctg_mtrl.update(ctg_mtrl_params)
-      redirect_to ctg_mtrl_path(@ctg_mtrl) 
+      redirect_to ctg_frst_ctg_secd_ctg_mtrls_path(@ctg_frst, @ctg_secd, @ctg_mtrl)
     else
       render :edit
     end

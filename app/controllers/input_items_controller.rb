@@ -1,13 +1,12 @@
 class InputItemsController < ApplicationController
   layout "application_control"
   before_filter :authenticate_user!
+  before_filter :is_can_use?, :only => [:index]
   #load_and_authorize_resource
 
-  def prepare_ctg_json
-  end
-   
   def index
     @ware_house = current_user.ware_houses.find(params[:ware_house_id])
+    @ware_house.uploading
     @input_items = @ware_house.input_items.all
   end
 
@@ -23,6 +22,24 @@ class InputItemsController < ApplicationController
       end
     end
   end
+
+  def ware_item
+    @ware_houses = current_user.ware_houses
+    @input_items = []
+    @ware_houses.each do |ware|
+      ware.input_items.each do|item|
+        @input_items << item
+      end
+    end
+  end
+
+  #def search
+  #  @ware_house_ids = current_user.ware_houses.ids
+
+  #  if params[:search].present?
+  #    #@input_items = InputItem.search params[:search], page: params[:page], per_page: Setting.site_themes.max_page
+  #  end
+  #end
    
 
    
@@ -103,6 +120,12 @@ class InputItemsController < ApplicationController
       output_item_params
     end
    
+    def is_can_use?
+      @ware_house = current_user.ware_houses.find(params[:ware_house_id])
+      unless @ware_house.state != Setting.ware_houses.completed && @ware_house.state != Setting.ware_houses.canceled 
+        redirect_to ware_houses_path 
+      end
+    end
 
   
   

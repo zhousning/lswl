@@ -17,6 +17,11 @@
             = f.text_field :name, :class => "form-control rounded-0" , :required => true
       
         .form-group.row
+          = f.label Setting.ware_houses.sign, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :sign, :class => "form-control rounded-0" , :required => true
+
+        .form-group.row
           = f.label Setting.ware_houses.ware_date, :class => "col-sm-3 col-form-label text-right"
           .col-sm-6
             = f.date_field :ware_date, :class => "form-control rounded-0" , :required => true

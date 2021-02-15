@@ -1,0 +1,14 @@
+.nested-fields.nestd-item
+  .form-group
+    .field.d-inline
+      .form-group.row
+        = f.label '物品名称', :class => "col-sm-3 col-form-label text-right"
+        .col-sm-6
+          = select_tag :input_item, nil, :class=>"form-control ctg_mtrl", :style => "width: 100%", :required => true
+
+      .form-group.row
+        = f.label Setting.output_items.count, :class => "col-sm-3 col-form-label text-right"
+        .col-sm-6
+          = f.number_field :count, :class => "form-control rounded-0" , :required => true
+          
+    = link_to_remove_association "X", f, :class => "nestd-notify-badge"
