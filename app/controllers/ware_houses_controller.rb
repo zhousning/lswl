@@ -35,7 +35,21 @@ class WareHousesController < ApplicationController
   end
 
   def completed
+    @ware_house = current_user.ware_houses.find(params[:id])
+    @input_items = @ware_house.input_items
+    @input_items.each do |item|
+      ctg_mtrl = item.ctg_mtrl
+      count = item.count
+      stocks = current_user.stocks.where(:ctg_mtrl => ctg_mtrl)
+      unless stocks.blank?
+        @stock = stocks.first
+        @stock.add_count(count)
+      else
+        Stock.create(:count => count, :ctg_mtrl => ctg_mtrl, :user => current_user)
+      end
+    end
     @ware_house.complete
+    redirect_to ware_house_path(@ware_house)
   end
    
   def canceled

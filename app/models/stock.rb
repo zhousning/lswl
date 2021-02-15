@@ -1,14 +1,14 @@
 class Stock < ActiveRecord::Base
 
-
-
-
-
-
   belongs_to :ctg_mtrl
 
 
   belongs_to :user
+
+  def add_count(num)
+    count = self.count + num
+    update_attribute :count, count 
+  end
 
 
 end
