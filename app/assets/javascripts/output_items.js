@@ -2,7 +2,7 @@ $(".output_items").ready(function() {
   if ($(".output_items.index").length > 0) {
     var $table = $('#stock-table');
     var $button = $('#stock-table-btn');
-    var $next = $('#output-item-next-step');
+    var $save = $('#output-item-save');
     var url = "/retrievals/" + gon.retrieval + "/output_items/select_stock?selections=";
     var create_url = "/retrievals/" + gon.retrieval + "/output_items/output_item_create?nums=";
 
@@ -16,11 +16,14 @@ $(".output_items").ready(function() {
       window.location = url;
     })
 
-    $next.click(function () {
+    $save.click(function () {
       var stockCounts = $(".stock-count");
       var outputCounts = $(".output-count");
       var outputItems = $(".output-item-index");
       var result = "";
+      if (stockCounts.length == 0) {
+        return;
+      }
       for (var i=0; i<stockCounts.length; i++) {
         var outputid = $(outputItems[i]).text();
         var stocknum = parseInt($(stockCounts[i]).text());

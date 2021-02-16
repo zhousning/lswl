@@ -42,17 +42,19 @@ class RetrievalsController < ApplicationController
   def completed
     @retrieval = current_user.retrievals.find(params[:id])
     @output_items = @retrieval.output_items
-    begin
-      Stock.transaction do
-        @output_items.each do |item|
-          stock = item.stock
-          count = item.count
-          stock.minus_count(count)
+    unless @output_items.blank? 
+      begin
+        Stock.transaction do
+          @output_items.each do |item|
+            stock = item.stock
+            count = item.count
+            stock.minus_count(count)
+          end
         end
+        @retrieval.complete
+      rescue
+        flash[:warning] = "库存不足，请检查库存"
       end
-      @retrieval.complete
-    rescue
-      flash[:warning] = "库存不足，请检查库存"
     end
     redirect_to retrieval_path(@retrieval)
   end

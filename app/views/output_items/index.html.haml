@@ -9,12 +9,13 @@
         %h5
           = fa_icon "list", text: "出库单明细"
           - if @retrieval.output_items.size > 0
-            = link_to retrieval_path(@retrieval), :class => "button pull-right button-small button-caution mr-1" do
-              = fa_icon " chevron-right", text: "下一步", right: false 
+            -#
+              = link_to , :id => "output-item-next", :class => "button pull-right button-small button-caution mr-1" do
+                = fa_icon " chevron-right", text: "下一步", right: false 
+            %button#output-item-save{:type => "button", :class => "button pull-right button-small button-caution mr-1"}
+              = fa_icon "save", text: "下一步", right: false 
           = link_to edit_retrieval_path(@retrieval), :class => "button pull-right button-small button-primary mr-1" do
             = fa_icon " chevron-left", text: "上一步", right: false 
-          %button#output-item-next-step{:type => "button", :class => "button pull-right button-small button-action mr-1"}
-            = fa_icon "save", text: "保存", right: false 
           -#
             = link_to new_retrieval_output_item_path(@retrieval), :class => "button pull-right button-small button-royal mr-1" do
               = fa_icon "plus", text: Setting.systems.btn_new, right: false 
@@ -69,8 +70,8 @@
                       %td
                         .container-fluid
                           .row.justify-content-center
-                            = link_to "填写", edit_retrieval_output_item_path(@retrieval, output_item), :class => "button button-highlight button-small mr-1" 
                             -#
+                              = link_to "填写", edit_retrieval_output_item_path(@retrieval, output_item), :class => "button button-highlight button-small mr-1" 
                               = link_to "详细",  retrieval_output_item_path(@retrieval, output_item), :class => "button button-primary button-small mr-1" 
                             = link_to "删除",  retrieval_output_item_path(@retrieval, output_item), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
       = render "layouts/bootstrap/card"

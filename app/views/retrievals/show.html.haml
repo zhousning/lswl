@@ -10,7 +10,7 @@
           - if @retrieval.state != Setting.retrievals.completed && @retrieval.state != Setting.retrievals.canceled 
             = link_to canceled_retrieval_path(@retrieval), :data => {:confirm => "作废后不允许再修改，确定作废吗?"}, :class => "button pull-right button-small button-caution mr-1" do
               = fa_icon "trash-o", text: "作废", right: false 
-          - if @retrieval.state == Setting.retrievals.selected
+          - if !@output_items.blank? && @retrieval.state == Setting.retrievals.selected
             = link_to completed_retrieval_path(@retrieval), :data => {:confirm => "入库后不允许再修改，确认入库吗?"}, :class => "button pull-right button-small button-royal mr-1" do
               = fa_icon "paper-plane-o", text: "出库", right: false 
           = link_to "/#{controller_name}", :class => "button pull-right button-primary button-small mr-1" do

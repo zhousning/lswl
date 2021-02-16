@@ -57,62 +57,62 @@ class OutputItemsController < ApplicationController
       end
     rescue
       flash[:warning] = "数据不合法"
+      redirect_to retrieval_output_items_path(@retrieval)
     end
-    redirect_to retrieval_output_items_path(@retrieval)
+    redirect_to retrieval_path(@retrieval)
   end
-   
-  def show
-    @retrieval = current_user.retrievals.find(params[:retrieval_id])
-    @output_items = @retrieval.output_items.all
-    @output_item = @output_items.find(params[:id])
-  end
-   
-  def new
-    @retrieval = current_user.retrievals.find(params[:retrieval_id])
-    @output_item = OutputItem.new
-  end
-   
-  def create
-    @retrieval = current_user.retrievals.find(params[:retrieval_id])
-    @output_item = OutputItem.new(output_item_params)
-    @output_item.retrieval = @retrieval 
-    if @output_item.save
-      redirect_to retrieval_output_items_path(@retrieval, @output_item) 
-    else
-      render :new
-    end
-  end
-   
-
-   
-  def edit
-    @retrieval = current_user.retrievals.find(params[:retrieval_id])
-    @output_items = @retrieval.output_items.all
-    @output_item = @output_items.find(params[:id])
-  end
-   
-
-   
-  def update
-    @retrieval = current_user.retrievals.find(params[:retrieval_id])
-    @output_items = @retrieval.output_items.all
-    @output_item = @output_items.find(params[:id])
-    if @output_item.update(output_item_params)
-      redirect_to retrieval_output_items_path(@retrieval, @output_item) 
-    else
-      render :edit
-    end
-  end
-   
-
    
   def destroy
     @retrieval = current_user.retrievals.find(params[:retrieval_id])
-    @output_items = @retrieval.output_items.all
+    @output_items = @retrieval.output_items
     @output_item = @output_items.find(params[:id])
     @output_item.destroy
     redirect_to :action => :index
   end
+
+  #def show
+  #  @retrieval = current_user.retrievals.find(params[:retrieval_id])
+  #  @output_items = @retrieval.output_items.all
+  #  @output_item = @output_items.find(params[:id])
+  #end
+  # 
+  #def new
+  #  @retrieval = current_user.retrievals.find(params[:retrieval_id])
+  #  @output_item = OutputItem.new
+  #end
+  # 
+  #def create
+  #  @retrieval = current_user.retrievals.find(params[:retrieval_id])
+  #  @output_item = OutputItem.new(output_item_params)
+  #  @output_item.retrieval = @retrieval 
+  #  if @output_item.save
+  #    redirect_to retrieval_output_items_path(@retrieval, @output_item) 
+  #  else
+  #    render :new
+  #  end
+  #end
+  # 
+
+  # 
+  #def edit
+  #  @retrieval = current_user.retrievals.find(params[:retrieval_id])
+  #  @output_items = @retrieval.output_items.all
+  #  @output_item = @output_items.find(params[:id])
+  #end
+  # 
+
+  # 
+  #def update
+  #  @retrieval = current_user.retrievals.find(params[:retrieval_id])
+  #  @output_items = @retrieval.output_items.all
+  #  @output_item = @output_items.find(params[:id])
+  #  if @output_item.update(output_item_params)
+  #    redirect_to retrieval_output_items_path(@retrieval, @output_item) 
+  #  else
+  #    render :edit
+  #  end
+  #end
+   
    
 
   
