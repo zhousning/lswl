@@ -12,9 +12,7 @@
                 %li= msg
       
         .form-group.row
-          = f.label '物品名称', :class => "col-sm-3 col-form-label text-right"
           .col-sm-6
-            = select_tag "ctg_mtrl", nil, :class=>"form-control", :style => "width: 100%", :required => true
 
         .form-group.row
           = f.label Setting.output_items.count, :class => "col-sm-3 col-form-label text-right"

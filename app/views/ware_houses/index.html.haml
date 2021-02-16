@@ -62,7 +62,7 @@
                           .row.justify-content-center
                             - if ware_house.state != Setting.ware_houses.completed and ware_house.state != Setting.ware_houses.canceled
                               = link_to "填写", edit_ware_house_path(ware_house), :class => "button button-highlight button-small mr-1" 
-                            = link_to "详细",  ware_house_path(ware_house), :class => "button button-primary button-small mr-1" 
+                            = link_to "入库单",  ware_house_path(ware_house), :class => "button button-primary button-small mr-1" 
                             -#
                               = link_to "入库", ware_house_input_items_path(ware_house), :class => "button button-royal button-small mr-1" 
                               = link_to "删除",  ware_house, :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 

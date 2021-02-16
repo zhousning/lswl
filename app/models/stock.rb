@@ -1,15 +1,22 @@
 class Stock < ActiveRecord::Base
+  validates_numericality_of :count, :only_integer => true, :greater_than_or_equal_to => 0 
 
   belongs_to :ctg_mtrl
 
 
   belongs_to :user
 
+  has_many :output_items
+
   def add_count(num)
     count = self.count + num
     update_attribute :count, count 
   end
 
+  def minus_count(num)
+    count = self.count - num
+    update_attributes!(:count => count) 
+  end
 
 end
 

@@ -8,17 +8,41 @@
       - content_for :card_header do
         %h5
           = fa_icon "list", text: "出库单明细"
-          = link_to "/retrievals/#{@retrieval.id}/#{controller_name}/new", :class => "button pull-right button-primary" do
-            = fa_icon "plus", text: "选择物品", right: false 
+          - if @retrieval.output_items.size > 0
+            = link_to retrieval_path(@retrieval), :class => "button pull-right button-small button-caution mr-1" do
+              = fa_icon " chevron-right", text: "下一步", right: false 
+          = link_to edit_retrieval_path(@retrieval), :class => "button pull-right button-small button-primary mr-1" do
+            = fa_icon " chevron-left", text: "上一步", right: false 
+          %button#output-item-next-step{:type => "button", :class => "button pull-right button-small button-action mr-1"}
+            = fa_icon "save", text: "保存", right: false 
+          -#
+            = link_to new_retrieval_output_item_path(@retrieval), :class => "button pull-right button-small button-royal mr-1" do
+              = fa_icon "plus", text: Setting.systems.btn_new, right: false 
+          %button{:type => "button", :class => "button pull-right button-small button-royal mr-1", :"data-toggle" =>"modal", :"data-target" => "#stockModal" }
+            = fa_icon "plus", text: Setting.systems.btn_new, right: false 
       - content_for :card_body do
         .container-fluid
           .row
+            - if flash[:warning]
+              #error_explanation.alert.alert-danger.alert-dismissible.fade.show
+                %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+                  %span{"aria-hidden" => "true"} x 
+                %h2
+                  = flash[:warning]
             .col-md-12
               %table.text-center.table-striped.table-sm{:'data-toggle' => "table", :"data-pagination"=>"true", :'data-id-table'=>"advancedTable"}
                 %thead
                   %tr
                     %th{:scope => "col"} #
-                  
+
+                    %th.w-10{:scope => "col"}
+                      = Setting.ctg_mtrls.idno
+                    %th.w-50{:scope => "col"}
+                      = Setting.ctg_mtrls.name
+                    %th.w-10{:scope => "col"}
+                      = Setting.ctg_mtrls.model_no
+                    %th.w-10{:scope => "col"}
+                      剩余
                     %th{:scope => "col"}
                       = Setting.output_items.count
                     %th{:scope => "col"}
@@ -27,14 +51,55 @@
                   - @output_items.each_with_index do |output_item, index|
                     %tr
                       %td{:scope => "row"}
+                        %span.output-item-index{:hidden => "true"}
+                          = output_item.id
                         = index+1
                     
                       %td
-                        = output_item.count
+                        = output_item.stock.ctg_mtrl.idno
+                      %td
+                        = output_item.stock.ctg_mtrl.name
+                      %td
+                        = output_item.stock.ctg_mtrl.model_no
+                      %td
+                        %span.stock-count
+                          = output_item.stock.count
+                      %td
+                        = number_field_tag "output_count", output_item.count, :class => "form-control output-count"
                       %td
                         .container-fluid
                           .row.justify-content-center
-                            = link_to "编辑", edit_retrieval_output_item_path(@retrieval, output_item), :class => "button button-highlight button-small mr-1" 
-                            = link_to "详细",  retrieval_output_item_path(@retrieval, output_item), :class => "button button-primary button-small mr-1" 
+                            = link_to "填写", edit_retrieval_output_item_path(@retrieval, output_item), :class => "button button-highlight button-small mr-1" 
+                            -#
+                              = link_to "详细",  retrieval_output_item_path(@retrieval, output_item), :class => "button button-primary button-small mr-1" 
                             = link_to "删除",  retrieval_output_item_path(@retrieval, output_item), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
       = render "layouts/bootstrap/card"
+
+#stockModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "stockModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-dialog-centered.modal-xl
+    .modal-content
+      .modal-header
+        %button{:type => "button", :class =>"close", :"data-dismiss" => "modal", :"aria-label" => "Close"}
+          %span{:"aria-hidden" => "true"}
+            &times;
+        .modal-body
+          -#
+            %table.text-center.table-sm{:'data-search' => "true", :"data-click-to-select" => "true", :"data-checkbox-header" => "false", :'data-toggle' => "table", :"data-pagination"=>"true", :'data-id-table'=>"advancedTable"}
+          %table#stock-table.text-center.table-sm{:'data-search' => "true", :"data-click-to-select" => "true", :"data-checkbox-header" => "true", :'data-toggle' => "table", :"data-height" =>"460", :'data-url' => "/retrievals/#{@retrieval.id}/output_items/current_stock" }
+            
+            %thead
+              %tr
+                %th{:"data-field" => "index", "data-checkbox" => "true" }
+                %th{:"data-field" => "idno"}
+                  = Setting.ctg_mtrls.idno
+                %th{:"data-field" => "name"}
+                  = Setting.ctg_mtrls.name
+                %th{:"data-field" => "model_no"}
+                  = Setting.ctg_mtrls.model_no
+                %th{:"data-field" => "pet_name"}
+                  = Setting.ctg_mtrls.pet_name
+                %th{:"data-field" => "count"}
+                  = Setting.stocks.count
+        .modal-footer
+          %button#stock-table-btn.button.button-primary{:type => "button"}
+            确定

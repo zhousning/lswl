@@ -1441,7 +1441,13 @@ development:
     name: 名称
     outdate: 出库日期
     dept: 部门
+    signer: 填写人
     receiver: 领取人
+    opening: "opening"
+    selecting: "selecting"
+    selected: "selected"
+    completed: "completed"
+    canceled: "canceled" 
   output_items:
     label: 出库项目
     count: 数量

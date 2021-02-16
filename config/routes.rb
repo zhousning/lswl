@@ -124,8 +124,13 @@ Rails.application.routes.draw do
     get :download_append, :on => :member
   end
   resources :retrievals do
+    get :completed, :on => :member
+    get :canceled, :on => :member
     get :download_append, :on => :member
     resources :output_items do
+      get :current_stock, :on => :collection
+      get :select_stock, :on => :collection
+      get :output_item_create, :on => :collection
     end
   end
   resources :flower

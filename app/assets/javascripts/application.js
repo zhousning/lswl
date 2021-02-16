@@ -15,6 +15,8 @@
 //= require parsley
 //= require parsley.i18n.zh_cn
 //= require popper
+//= require dropzone
+//= require_tree .
 //= require bootstrap-sprockets
 //= require bootstrap-table/bootstrap-table
 //= require bootstrap-table/locale/bootstrap-table-zh-CN
@@ -22,8 +24,6 @@
 //= require kindeditor
 //= require Chart.bundle 
 //= require chartkick 
-//= require dropzone
-//= require_tree .
 //= require select2
 //= require select2_locale_zh-CN
 

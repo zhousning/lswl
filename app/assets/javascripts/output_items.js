@@ -1,38 +1,43 @@
 $(".output_items").ready(function() {
-  if ($(".output_items.new, .output_items.edit").length > 0) {
-    var url = '/input_items/category';
-    $.getJSON(url, function(data) {
-      var mydata = $.map(data, function(item) {
-        item.id = item.id;
-        item.text = item.text;
-        /*if (item.id == gon.ctg_mtr) {
-          item.selected = true;
+  if ($(".output_items.index").length > 0) {
+    var $table = $('#stock-table');
+    var $button = $('#stock-table-btn');
+    var $next = $('#output-item-next-step');
+    var url = "/retrievals/" + gon.retrieval + "/output_items/select_stock?selections=";
+    var create_url = "/retrievals/" + gon.retrieval + "/output_items/output_item_create?nums=";
+
+    $button.click(function () {
+      var selections = $table.bootstrapTable('getSelections');
+      var str = "";
+      for (var i=0; i<selections.length; i++) {
+        str += selections[i]["id"] + ",";
+      }
+      url += str;
+      window.location = url;
+    })
+
+    $next.click(function () {
+      var stockCounts = $(".stock-count");
+      var outputCounts = $(".output-count");
+      var outputItems = $(".output-item-index");
+      var result = "";
+      for (var i=0; i<stockCounts.length; i++) {
+        var outputid = $(outputItems[i]).text();
+        var stocknum = parseInt($(stockCounts[i]).text());
+        var outputnum = parseInt($(outputCounts[i]).val());
+        if (stocknum < outputnum) {
+          alert("超出库存");
+          return;
+        } else if (outputnum == 0) {
+          alert("存在未填项目");
+          return;
+        } else {
+          result += outputid + "," + outputnum + "$";
         }
-        */
-        return item;
-      });
-      $( "#ctg_mtrl" ).select2({
-        theme: "bootstrap",
-        placeholder: '物品名',
-        language: "zh-CN",
-        data: mydata 
-        /*
-        ajax: {
-          url: '/output_items/category',
-          dataType: 'json',
-          processResults: function (data) {
-            console.log(data);
-            return {
-              results: data
-            };
-          }
-        }
-        */
-      });
-      $('#ctg_mtrl').on('select2:opening select2:closing', function( event ) {
-        var $searchfield = $(this).parent().find('.select2-search__field');
-        $searchfield.prop('disabled', true);
-      });
+      }
+      //var obj = JSON.stringify(result);
+      create_url += result;
+      window.location = create_url;
     })
   }
 });

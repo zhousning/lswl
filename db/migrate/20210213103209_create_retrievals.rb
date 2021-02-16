@@ -13,8 +13,10 @@ class CreateRetrievals < ActiveRecord::Migration
 
     
       t.string :sign,  null: false, default: Setting.systems.default_str
+      t.string :signer,  null: false, default: Setting.systems.default_str
     
 
+      t.string :state
     
 
     

@@ -7,6 +7,9 @@ class CtgMtrl < ActiveRecord::Base
   has_many :input_items, :dependent => :destroy
   accepts_nested_attributes_for :input_items, reject_if: :all_blank, allow_destroy: true
 
+  has_many :output_items, :dependent => :destroy
+  accepts_nested_attributes_for :output_items, reject_if: :all_blank, allow_destroy: true
+
   has_many :enclosures, :dependent => :destroy
   accepts_nested_attributes_for :enclosures, reject_if: :all_blank, allow_destroy: true
 

@@ -13,8 +13,8 @@ class WareHousesController < ApplicationController
    
   def show
     @ware_house = current_user.ware_houses.find(params[:id])
-    @ware_house.uploaded
     @input_items = @ware_house.input_items
+    @ware_house.uploaded unless @input_items.blank?
   end
    
    
