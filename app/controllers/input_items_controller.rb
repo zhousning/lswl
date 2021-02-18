@@ -99,6 +99,7 @@ class InputItemsController < ApplicationController
     @ware_house = current_user.ware_houses.find(params[:ware_house_id])
     @input_item = @ware_house.input_items.find(params[:id])
     @input_item.destroy
+    @ware_house.uploading if @ware_house.input_items.blank?
     redirect_to :action => :index
   end
    

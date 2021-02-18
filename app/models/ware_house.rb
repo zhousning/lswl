@@ -16,7 +16,7 @@ class WareHouse < ActiveRecord::Base
   end
 
   def uploading 
-    if opening?
+    if opening? or uploaded?
       update_attribute :state, Setting.ware_houses.uploading 
     end
   end

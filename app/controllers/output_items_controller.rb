@@ -67,6 +67,7 @@ class OutputItemsController < ApplicationController
     @output_items = @retrieval.output_items
     @output_item = @output_items.find(params[:id])
     @output_item.destroy
+    @retrieval.selecting if @retrieval.output_items.blank?
     redirect_to :action => :index
   end
 

@@ -19,7 +19,7 @@ class Retrieval < ActiveRecord::Base
   end
 
   def selecting 
-    if opening?
+    if opening? or selected?
       update_attribute :state, Setting.retrievals.selecting 
     end
   end
