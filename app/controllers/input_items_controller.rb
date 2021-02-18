@@ -8,19 +8,78 @@ class InputItemsController < ApplicationController
     @ware_house = current_user.ware_houses.find(params[:ware_house_id])
     @ware_house.uploading
     @input_items = @ware_house.input_items.all
+    gon.ware_house = @ware_house.id
   end
 
-  def category
+  def current_ctg_mtrl
+    @ware_house = current_user.ware_houses.find(params[:ware_house_id])
+    @inputs = @ware_house.input_items
+    unless @inputs.blank?
+      mtrl_arr = []
+      @inputs.each do |input|
+        ctg_mtrl = input.ctg_mtrl
+        mtrl_arr << ctg_mtrl.id
+      end
+      @ctg_mtrls = ctg_mtrl_all(mtrl_arr)
+    else
+      @ctg_mtrls = ctg_mtrl_all
+    end
+  end
+
+  def ctg_mtrl_all(ctg_ids = [])
     @ctg_mtrls = []
     ctg_frsts = current_user.ctg_frsts
     ctg_frsts.each do |frst|
       ctg_secds = frst.ctg_secds
       ctg_secds.each do |secd|
         secd.ctg_mtrls.each do |mtrl|
-          @ctg_mtrls << mtrl
+          @ctg_mtrls << mtrl unless ctg_ids.include?(mtrl.id)
         end
       end
     end
+    @ctg_mtrls
+  end
+
+  def select_ctg_mtrl
+    @ware_house = current_user.ware_houses.find(params[:ware_house_id])
+    ctg_mtrl_ids = params[:selections].split(",")
+    unless ctg_mtrl_ids.empty?
+      @ctg_mtrls = CtgMtrl.find(ctg_mtrl_ids)
+      InputItem.transaction do
+        @ctg_mtrls.each do |ctg_mtrl|
+          InputItem.create(:ware_house => @ware_house, :ctg_mtrl => ctg_mtrl)
+        end
+      end
+    end
+    redirect_to ware_house_input_items_path(@ware_house)
+  end
+
+  def input_item_create
+    @ware_house = current_user.ware_houses.find(params[:ware_house_id])
+    @inputs = @ware_house.input_items
+    nums = params[:nums]
+    objs = nums.split("$")
+    begin
+      InputItem.transaction do
+        objs.each do |obj|
+          obj_arr = obj.split(",")
+          id = obj_arr[0]
+          input = @inputs.find(id)
+
+          price_count = obj_arr[1].split("-")
+          unit_price = price_count[0].to_f
+          count = price_count[1].to_i
+          total_price = unit_price*count
+
+          input.update_attributes!(:unit_price => unit_price, :count => count, :total_price => total_price)
+        end
+      end
+    rescue
+      flash[:warning] = "数据不合法"
+      redirect_to ware_house_input_items_path(@ware_house)
+      return
+    end
+    redirect_to ware_house_path(@ware_house)
   end
 
   def ware_item

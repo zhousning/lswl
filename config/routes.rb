@@ -118,6 +118,9 @@ Rails.application.routes.draw do
     get :completed, :on => :member
     get :canceled, :on => :member
     resources :input_items do
+      get :current_ctg_mtrl, :on => :collection
+      get :select_ctg_mtrl, :on => :collection
+      get :input_item_create, :on => :collection
     end
   end
   resources :stocks do

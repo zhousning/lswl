@@ -58,6 +58,7 @@ class OutputItemsController < ApplicationController
     rescue
       flash[:warning] = "数据不合法"
       redirect_to retrieval_output_items_path(@retrieval)
+      return
     end
     redirect_to retrieval_path(@retrieval)
   end
