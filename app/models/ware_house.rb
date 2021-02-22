@@ -40,14 +40,17 @@ class WareHouse < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: ware_houses
 #
 #  id         :integer         not null, primary key
 #  name       :string          default(""), not null
+#  sign       :string          default(""), not null
 #  ware_date  :date
 #  desc       :text
+#  state      :string
 #  user_id    :integer
 #  created_at :datetime        not null
 #  updated_at :datetime        not null

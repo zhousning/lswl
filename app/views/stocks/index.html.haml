@@ -30,6 +30,10 @@
                     %th{:scope => "col"}
                       = Setting.stocks.count
                     %th{:scope => "col"}
+                      = Setting.stocks.unit_price
+                    %th{:scope => "col"}
+                      = Setting.stocks.total_price
+                    %th{:scope => "col"}
                       = Setting.stocks.position
                     %th{:scope => "col"}
                       设置
@@ -49,6 +53,10 @@
                         = stock.ctg_mtrl.pet_name
                       %td
                         = stock.count
+                      %td
+                        = stock.unit_price
+                      %td
+                        = stock.total_price
                       %td
                         = stock.position
                       %td

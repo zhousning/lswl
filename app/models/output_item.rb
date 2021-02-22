@@ -4,7 +4,14 @@ class OutputItem < ActiveRecord::Base
   belongs_to :retrieval
 
   belongs_to :stock
+
+  def add_count(count)
+    unit_price = self.stock.unit_price
+    total_price = unit_price*count.to_f
+    update_attributes!(:count => count, :unit_price => unit_price, :total_price => total_price)
+  end
 end
+
 
 # == Schema Information
 #
@@ -13,6 +20,7 @@ end
 #  id           :integer         not null, primary key
 #  count        :integer         default("0"), not null
 #  retrieval_id :integer
+#  stock_id     :integer
 #  created_at   :datetime        not null
 #  updated_at   :datetime        not null
 #

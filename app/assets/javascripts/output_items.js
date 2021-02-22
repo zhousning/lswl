@@ -28,10 +28,7 @@ $(".output_items").ready(function() {
         var outputid = $(outputItems[i]).text();
         var stocknum = parseInt($(stockCounts[i]).text());
         var outputnum = parseInt($(outputCounts[i]).val());
-        if (stocknum < outputnum) {
-          alert("超出库存");
-          return;
-        } else if (outputnum == 0) {
+        if (outputnum == 0) {
           alert("存在未填项目");
           return;
         } else {

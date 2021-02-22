@@ -44,6 +44,7 @@ class Retrieval < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: retrievals
@@ -54,6 +55,8 @@ end
 #  dept       :string          default(""), not null
 #  receiver   :string          default(""), not null
 #  sign       :string          default(""), not null
+#  signer     :string          default(""), not null
+#  state      :string
 #  user_id    :integer
 #  created_at :datetime        not null
 #  updated_at :datetime        not null

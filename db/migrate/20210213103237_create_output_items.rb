@@ -4,6 +4,8 @@ class CreateOutputItems < ActiveRecord::Migration
 
     
       t.integer :count,  null: false, default: Setting.systems.default_num 
+      t.float :unit_price,  null: false, default: Setting.systems.default_num 
+      t.float :total_price,  null: false, default: Setting.systems.default_num 
     
       t.references :retrieval
 

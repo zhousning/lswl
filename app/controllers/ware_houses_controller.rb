@@ -40,12 +40,14 @@ class WareHousesController < ApplicationController
     @input_items.each do |item|
       ctg_mtrl = item.ctg_mtrl
       count = item.count
+      unit_price = item.unit_price
       stocks = current_user.stocks.where(:ctg_mtrl => ctg_mtrl)
       unless stocks.blank?
         @stock = stocks.first
-        @stock.add_count(count)
+        @stock.add_count(count, unit_price)
       else
-        Stock.create(:count => count, :ctg_mtrl => ctg_mtrl, :user => current_user)
+        @stock = Stock.create(:count => count, :ctg_mtrl => ctg_mtrl, :user => current_user)
+        @stock.add_count(0, unit_price)
       end
     end
     @ware_house.complete

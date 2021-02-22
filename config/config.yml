@@ -1434,7 +1434,9 @@ development:
     total_price: 总价
   stocks:
     label: 库存
+    unit_price: 单价
     count: 数量
+    total_price: 总价
     position: 位置
   retrievals:
     label: 出库
@@ -1451,6 +1453,8 @@ development:
   output_items:
     label: 出库项目
     count: 数量
+    unit_price: 单价
+    total_price: 总价
 test:
   admins: *106
   users: *107

@@ -43,6 +43,8 @@
                     %th.w-10{:scope => "col"}
                       = Setting.ctg_mtrls.model_no
                     %th.w-10{:scope => "col"}
+                      = Setting.output_items.unit_price
+                    %th.w-10{:scope => "col"}
                       剩余
                     %th{:scope => "col"}
                       = Setting.output_items.count
@@ -62,6 +64,8 @@
                         = output_item.stock.ctg_mtrl.name
                       %td
                         = output_item.stock.ctg_mtrl.model_no
+                      %td
+                        = output_item.stock.unit_price
                       %td
                         %span.stock-count
                           = output_item.stock.count
@@ -99,6 +103,8 @@
                   = Setting.ctg_mtrls.model_no
                 %th{:"data-field" => "pet_name"}
                   = Setting.ctg_mtrls.pet_name
+                %th{:"data-field" => "unit_price"}
+                  = Setting.stocks.unit_price
                 %th{:"data-field" => "count"}
                   = Setting.stocks.count
         .modal-footer

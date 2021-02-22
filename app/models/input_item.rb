@@ -27,3 +27,18 @@ class InputItem < ActiveRecord::Base
   #scope :search_import, -> { includes(:ctg_mtrl) }
 
 end
+
+# == Schema Information
+#
+# Table name: input_items
+#
+#  id            :integer         not null, primary key
+#  unit_price    :float           default("0.0"), not null
+#  count         :integer         default("0"), not null
+#  total_price   :float           default("0.0"), not null
+#  ware_house_id :integer
+#  ctg_mtrl_id   :integer
+#  created_at    :datetime        not null
+#  updated_at    :datetime        not null
+#
+

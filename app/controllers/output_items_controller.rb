@@ -52,7 +52,7 @@ class OutputItemsController < ApplicationController
           id = obj_arr[0]
           count = obj_arr[1]
           output = @outputs.find(id)
-          output.update_attributes!(:count => count)
+          output.add_count(count)
         end
       end
     rescue
