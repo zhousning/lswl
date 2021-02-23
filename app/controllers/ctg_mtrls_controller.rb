@@ -37,7 +37,6 @@ class CtgMtrlsController < ApplicationController
     excel = params["excel_file"]
     tool = ExcelTool.new
     results = tool.parseExcel(excel.path)
-    ctg_frsts = current_user.ctg_frsts
 
     first_name = ""
     second_name = ""
@@ -46,9 +45,10 @@ class CtgMtrlsController < ApplicationController
     pet_name = ""
     model_no = ""
     unit = ""
+    @frst_cache = nil 
+    @secd_cache = nil 
 
     results["Sheet1"][1..-1].each do |items|
-      params = Hash.new
       items.each do |k, v|
         if !(/A/ =~ k).nil?
           first_name = v.nil? ? "" : v 
@@ -64,20 +64,34 @@ class CtgMtrlsController < ApplicationController
           model_no = v.nil? ? "" : v 
         elsif !(/G/ =~ k).nil?
           unit = v.nil? ? "" : v 
+          break
         end
       end
-      ctg_firsts = ctg_frsts.where(:name => first_name)
-      if ctg_firsts.blank?
-        @ctg_first = CtgFrst.create!(:name => first_name, :user => current_user)
+
+      next if first_name.blank?
+
+      if @frst_cache && @frst_cache.name == first_name
+        @ctg_first = @frst_cache
       else
-        @ctg_first = ctg_firsts.first
+        ctg_firsts = CtgFrst.where(:name => first_name, :user_id => current_user.id)
+        if ctg_firsts.blank?
+          @ctg_first = CtgFrst.create!(:name => first_name, :user => current_user)
+        else
+          @ctg_first = ctg_firsts.first
+        end
+        @frst_cache = @ctg_first
       end
 
-      ctg_secds = CtgSecd.where(:name => second_name, :ctg_frst_id => @ctg_first.id)
-      if ctg_secds.blank?
-        @ctg_secd = CtgSecd.create!(:name => second_name, :ctg_frst_id => @ctg_first.id)
+      if @secd_cache && @secd_cache.name == second_name
+        @ctg_secd = @secd_cache
       else
-        @ctg_secd = ctg_secds.first
+        ctg_secds = CtgSecd.where(:name => second_name, :ctg_frst_id => @ctg_first.id)
+        if ctg_secds.blank?
+          @ctg_secd = CtgSecd.create!(:name => second_name, :ctg_frst_id => @ctg_first.id)
+        else
+          @ctg_secd = ctg_secds.first
+        end
+        @secd_cache = @ctg_secd
       end
 
       ctg_mtrls = CtgMtrl.where(:name => mtrl_name, :idno => idno, :pet_name => pet_name, :model_no => model_no, :unit => unit, :ctg_secd_id => @ctg_secd.id)
@@ -142,14 +156,14 @@ class CtgMtrlsController < ApplicationController
     end
   end
    
-  def destroy
-    ctg_frsts = current_user.ctg_frsts
-    @ctg_frst = ctg_frsts.find(params[:ctg_frst_id])
-    @ctg_secd = @ctg_frst.ctg_secds.find(params[:ctg_secd_id])
-    @ctg_mtrl = @ctg_secd.ctg_mtrls.find(params[:id])
-    @ctg_mtrl.destroy
-    redirect_to :action => :index
-  end
+  #def destroy
+  #  ctg_frsts = current_user.ctg_frsts
+  #  @ctg_frst = ctg_frsts.find(params[:ctg_frst_id])
+  #  @ctg_secd = @ctg_frst.ctg_secds.find(params[:ctg_secd_id])
+  #  @ctg_mtrl = @ctg_secd.ctg_mtrls.find(params[:id])
+  #  @ctg_mtrl.destroy
+  #  redirect_to :action => :index
+  #end
    
   private
     def ctg_mtrl_params

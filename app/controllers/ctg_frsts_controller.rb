@@ -29,7 +29,7 @@ class CtgFrstsController < ApplicationController
     @ctg_frst = CtgFrst.new(ctg_frst_params)
     @ctg_frst.user = current_user
     if @ctg_frst.save
-      redirect_to @ctg_frst
+      redirect_to ctg_frsts_path
     else
       render :new
     end
@@ -46,7 +46,7 @@ class CtgFrstsController < ApplicationController
   def update
     @ctg_frst = CtgFrst.find(params[:id])
     if @ctg_frst.update(ctg_frst_params)
-      redirect_to ctg_frst_path(@ctg_frst) 
+      redirect_to ctg_frsts_path
     else
       render :edit
     end
@@ -54,11 +54,11 @@ class CtgFrstsController < ApplicationController
    
 
    
-  def destroy
-    @ctg_frst = current_user.ctg_frsts.find(params[:id])
-    @ctg_frst.destroy
-    redirect_to :action => :index
-  end
+  #def destroy
+  #  @ctg_frst = current_user.ctg_frsts.find(params[:id])
+  #  @ctg_frst.destroy
+  #  redirect_to :action => :index
+  #end
    
 
   

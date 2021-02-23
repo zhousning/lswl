@@ -28,7 +28,7 @@
               = f.fields_for :ctg_secds do |ctg_secd|
                 = render 'ctg_secd_fields', f: ctg_secd 
               .links
-                = link_to_add_association "添加", f, :ctg_secds, :class => "button button-primary"
+                = link_to_add_association "添加", f, :ctg_secds, :class => "button button-small button-primary"
       
         .form-group.row
           .col-3.offset-3
