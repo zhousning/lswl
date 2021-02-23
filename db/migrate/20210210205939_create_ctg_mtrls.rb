@@ -9,6 +9,8 @@ class CreateCtgMtrls < ActiveRecord::Migration
       t.string :pet_name,  null: false, default: Setting.systems.default_str
     
       t.string :model_no,  null: false, default: Setting.systems.default_str
+
+      t.string :unit,  null: false, default: Setting.systems.default_str
     
 
     

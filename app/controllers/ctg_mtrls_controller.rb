@@ -28,6 +28,68 @@ class CtgMtrlsController < ApplicationController
     end
   end
 
+  def ctg_xls_download
+    send_file File.join(Rails.root, "public", "templates", "物品类目表.xlsx"), :filename => "物品类目表.xlsx", :type => "application/force-download", :x_sendfile=>true
+  end
+  
+
+  def parse_excel
+    excel = params["excel_file"]
+    tool = ExcelTool.new
+    results = tool.parseExcel(excel.path)
+    ctg_frsts = current_user.ctg_frsts
+
+    first_name = ""
+    second_name = ""
+    idno = "" 
+    mtrl_name = ""
+    pet_name = ""
+    model_no = ""
+    unit = ""
+
+    results["Sheet1"][1..-1].each do |items|
+      params = Hash.new
+      items.each do |k, v|
+        if !(/A/ =~ k).nil?
+          first_name = v.nil? ? "" : v 
+        elsif !(/B/ =~ k).nil?
+          second_name = v.nil? ? "" : v 
+        elsif !(/C/ =~ k).nil?
+          idno = v.nil? ? "" : v 
+        elsif !(/D/ =~ k).nil?
+          mtrl_name = v.nil? ? "" : v 
+        elsif !(/E/ =~ k).nil?
+          pet_name = v.nil? ? "" : v 
+        elsif !(/F/ =~ k).nil?
+          model_no = v.nil? ? "" : v 
+        elsif !(/G/ =~ k).nil?
+          unit = v.nil? ? "" : v 
+        end
+      end
+      ctg_firsts = ctg_frsts.where(:name => first_name)
+      if ctg_firsts.blank?
+        @ctg_first = CtgFrst.create!(:name => first_name, :user => current_user)
+      else
+        @ctg_first = ctg_firsts.first
+      end
+
+      ctg_secds = CtgSecd.where(:name => second_name, :ctg_frst_id => @ctg_first.id)
+      if ctg_secds.blank?
+        @ctg_secd = CtgSecd.create!(:name => second_name, :ctg_frst_id => @ctg_first.id)
+      else
+        @ctg_secd = ctg_secds.first
+      end
+
+      ctg_mtrls = CtgMtrl.where(:name => mtrl_name, :idno => idno, :pet_name => pet_name, :model_no => model_no, :unit => unit, :ctg_secd_id => @ctg_secd.id)
+
+      if ctg_mtrls.blank?
+        CtgMtrl.create!(:name => mtrl_name, :idno => idno, :pet_name => pet_name, :model_no => model_no, :unit => unit, :ctg_secd_id => @ctg_secd.id)
+      end
+
+    end
+    redirect_to list_ctg_mtrls_path 
+  end 
+
   def show
     ctg_frsts = current_user.ctg_frsts
     @ctg_frst = ctg_frsts.find(params[:ctg_frst_id])
@@ -103,7 +165,7 @@ class CtgMtrlsController < ApplicationController
         frst_h = Hash.new
         frst_h['name'] = frst.name
         frst_h['drag'] = false 
-        frst_h['open'] = true 
+        frst_h['open'] = false 
 
         secd_arr = []
         ctg_secds = frst.ctg_secds
@@ -111,7 +173,7 @@ class CtgMtrlsController < ApplicationController
           secd_h = Hash.new
           secd_h['name'] = secd.name
           secd_h['drag'] = false 
-          secd_h['open'] = true 
+          secd_h['open'] = false 
           secd_h['target'] = "_self"
           secd_h['url'] = ctg_frst_ctg_secd_ctg_mtrls_path(frst.id, secd.id)  
           secd_arr << secd_h 

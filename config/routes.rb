@@ -102,6 +102,8 @@ Rails.application.routes.draw do
 
   resources :ctg_mtrls, :only => [] do
     get :list, :on => :collection
+    get :ctg_xls_download, :on => :collection
+    post :parse_excel, :on => :collection
   end
   resources :ctg_frsts do
     resources :ctg_secds do

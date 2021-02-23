@@ -36,5 +36,6 @@
                           .row.justify-content-center
                             = link_to "编辑", edit_ctg_frst_path(ctg_frst), :class => "button button-highlight button-small mr-1" 
                             = link_to "详细",  ctg_frst_path(ctg_frst), :class => "button button-primary button-small mr-1" 
-                            = link_to "删除",  ctg_frst, :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
+                            -#
+                              = link_to "删除",  ctg_frst, :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
       = render "layouts/bootstrap/card"

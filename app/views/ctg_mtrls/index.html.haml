@@ -8,6 +8,14 @@
       - content_for :card_header do
         %h5
           = fa_icon "list", text: @ctg_frst.name + "/" + @ctg_secd.name 
+          = link_to ctg_xls_download_ctg_mtrls_path, :class => "button button-royal pull-right button-small mr-1" do
+            下载类目表模板
+          %button.button.button-caution.button-small.pull-right.mr-1{"data-target" => "#exampleModal", "data-toggle" => "modal", :type => "button"}
+            上传excel
+
+          = link_to ctg_frsts_path, :class => "button pull-right button-royal mr-1" do  
+            = fa_icon "plus", text: "类目管理", right: false 
+
           = link_to "/ctg_frsts/#{@ctg_frst.id}/ctg_secds/#{@ctg_secd.id}/#{controller_name}/new", :class => "button pull-right button-primary" do
             = fa_icon "plus", text: Setting.systems.btn_new, right: false 
       - content_for :card_body do
@@ -50,5 +58,23 @@
                           .row.justify-content-center
                             = link_to "编辑", edit_ctg_frst_ctg_secd_ctg_mtrl_path(ctg_mtrl.ctg_secd.ctg_frst, ctg_mtrl.ctg_secd, ctg_mtrl), :class => "button button-highlight button-small mr-1" 
                             = link_to "详细",  ctg_frst_ctg_secd_ctg_mtrl_path(ctg_mtrl.ctg_secd.ctg_frst, ctg_mtrl.ctg_secd, ctg_mtrl), :class => "button button-primary button-small mr-1" 
-                            = link_to "删除", ctg_frst_ctg_secd_ctg_mtrl_path(ctg_mtrl.ctg_secd.ctg_frst, ctg_mtrl.ctg_secd, ctg_mtrl), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
+                            -#
+                              = link_to "删除", ctg_frst_ctg_secd_ctg_mtrl_path(ctg_mtrl.ctg_secd.ctg_frst, ctg_mtrl.ctg_secd, ctg_mtrl), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
       = render "layouts/bootstrap/card"
+
+#exampleModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title 类目表上传 
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} x 
+      .modal-body
+        = form_tag "/ctg_mtrls/parse_excel", multipart: true do
+          .form-group.row
+            = label_tag "类目表", nil, :class => "col-4 text-right col-form-label col-form-label"
+            .col-8
+              = file_field_tag "excel_file", :required => true 
+          .form-group.row
+            .col-8
+              = submit_tag '保存', :class => "btn btn-primary" 
