@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :ctg_frsts
   has_many :stocks
   has_many :retrievals
+  has_many :projects
 
   belongs_to :role
 

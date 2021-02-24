@@ -74,9 +74,6 @@
                       %td
                         .container-fluid
                           .row.justify-content-center
-                            -#
-                              = link_to "填写", edit_retrieval_output_item_path(@retrieval, output_item), :class => "button button-highlight button-small mr-1" 
-                              = link_to "详细",  retrieval_output_item_path(@retrieval, output_item), :class => "button button-primary button-small mr-1" 
                             = link_to "删除",  retrieval_output_item_path(@retrieval, output_item), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
       = render "layouts/bootstrap/card"
 

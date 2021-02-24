@@ -1,0 +1,98 @@
+- provide(:title, t('.title'))
+
+.container-fluid
+  .row
+    = render "layouts/control_sidebar"
+    %main.col-md-9.ml-sm-auto.col-lg-10.p-3{:role => "main"}
+      - content_for :card_header do
+        %h5
+          = fa_icon "newspaper-o", text: t(controller_name + "." + action_name + '.title')
+          - if @pick.state != Setting.picks.completed && @pick.state != Setting.picks.canceled 
+            = link_to canceled_project_pick_path(@project, @pick), :data => {:confirm => "作废后不允许再修改，确定作废吗?"}, :class => "button pull-right button-small button-caution mr-1" do
+              = fa_icon "trash-o", text: "作废", right: false 
+          - if !@pick_items.blank? && @pick.state == Setting.picks.selected
+            = link_to completed_project_pick_path(@project, @pick), :data => {:confirm => "出料后不允许再修改，确认出料吗?"}, :class => "button pull-right button-small button-royal mr-1" do
+              = fa_icon "paper-plane-o", text: "出料", right: false 
+          = link_to project_picks_path(@project), :class => "button button-small pull-right button-primary mr-1" do
+            = fa_icon " chevron-left", text: Setting.systems.btn_back, right: false 
+      - content_for :card_body do
+        .container-fluid
+          .row
+            .col-md-8.offset-2
+              .card-body
+                .container-fluid
+                  .row
+                    - if flash[:warning]
+                      #error_explanation.alert.alert-danger.alert-dismissible.fade.show
+                        %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+                          %span{"aria-hidden" => "true"} x 
+                        %h2
+                          = flash[:warning]
+                  
+                    .col-sm-12
+                      %h2.text-center
+                        = @pick.name
+                        = "出料单" 
+
+                    .col-sm-6
+                      %p.text-left
+                        = "取货人："
+                        = @pick.dept + ": " + @pick.receiver
+                    .col-sm-6
+                      %p.text-right
+                        = @pick.pick_date.strftime('%Y 年 %m 月 %d 日')
+                  
+                    -#
+                      .col-md-6.mb-3.mr-3
+                      = Setting.picks.signer
+                      = @pick.signer
+                      = image_tag @pick.attch_url, :class => "w-100"
+                  .row
+                    .col-sm-12
+                      %table.text-center.table.table-bordered
+                        %thead
+                          %tr
+                            %th{:scope => "col"} #
+                            %th.w-50{:scope => "col"}
+                              = Setting.ctg_mtrls.idno
+                            %th{:scope => "col"}
+                              = Setting.ctg_mtrls.name
+                            %th{:scope => "col"}
+                              = Setting.ctg_mtrls.model_no
+                            %th{:scope => "col"}
+                              = Setting.stocks.count
+                            -#
+                              %th{:scope => "col"}
+                                = Setting.stocks.unit_price
+                              %th{:scope => "col"}
+                                = Setting.stocks.total_price
+                        %tbody
+                          - @pick_items.each_with_index do |pick_item, index|
+                            %tr
+                              %td{:scope => "row"}
+                                = index+1
+                            
+                              %td
+                                = pick_item.stock.ctg_mtrl.idno
+                              %td
+                                = pick_item.stock.ctg_mtrl.name
+                              %td
+                                = pick_item.stock.ctg_mtrl.model_no
+                              %td
+                                = pick_item.count
+                              -#
+                                %td
+                                  = pick_item.unit_price
+                                %td
+                                  = pick_item.total_price
+                  .row
+                    .offset-10.col-sm-2
+                      - if @pick.state == Setting.picks.completed
+                        %h2.text-success.text-center.border.border-success
+                          已出料
+                      - elsif @pick.state == Setting.picks.canceled
+                        %h2.text-danger.text-center.border.border-danger
+                          已作废
+                  
+                  
+      = render "layouts/bootstrap/card"

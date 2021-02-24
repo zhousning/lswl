@@ -25,6 +25,7 @@ class CtgMtrl < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: ctg_mtrls
@@ -34,6 +35,7 @@ end
 #  name        :string          default(""), not null
 #  pet_name    :string          default(""), not null
 #  model_no    :string          default(""), not null
+#  unit        :string          default(""), not null
 #  ctg_secd_id :integer
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null

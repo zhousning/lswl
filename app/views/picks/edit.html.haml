@@ -6,8 +6,10 @@
     %main.col-md-9.ml-sm-auto.col-lg-10.p-3{:role => "main"}
       - content_for :card_header do
         %h5
-          = fa_icon "plus-square-o", text: t(controller_name + "." + action_name + '.title')
-          = link_to "/#{controller_name}", :class => "button button-small  pull-right button-primary" do
+          = fa_icon "wpforms", text: t(controller_name + "." + action_name + '.title')
+          = link_to project_pick_pick_items_path(@project, @pick), :class => "button button-royal button-small pull-right mr-1" do
+            = fa_icon " chevron-right", text: "下一步", right: false 
+          = link_to project_picks_path(@project), :class => "button button-small pull-right button-primary mr-1" do
             = fa_icon " chevron-left", text: Setting.systems.btn_back, right: false 
 
       - content_for :card_body do

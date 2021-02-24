@@ -1,0 +1,61 @@
+.container-fluid
+  .row.justify-content-sm-center
+    .col-sm-12
+      = form_for [@project, @pick], :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
+        - if @pick.errors.any?
+          #error_explanation.alert.alert-danger.alert-dismissible.fade.show
+            %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+              %span{"aria-hidden" => "true"} x 
+            %h2= "#{pluralize(@pick.errors.count, "error")} prohibited this buyer from being saved:"
+            %ul
+              - @pick.errors.full_messages.each do |msg|
+                %li= msg
+      
+        .form-group.row
+          = f.label Setting.picks.name, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :name, :class => "form-control rounded-0" , :required => true
+          
+        .form-group.row
+          = f.label Setting.picks.pick_date, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.date_field :pick_date, :class => "form-control rounded-0" , :required => true
+          
+        .form-group.row
+          = f.label Setting.picks.signer, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :signer, :class => "form-control rounded-0" , :required => true
+          
+        .form-group.row
+          = f.label Setting.picks.dept, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :dept, :class => "form-control rounded-0" , :required => true
+          
+        .form-group.row
+          = f.label Setting.picks.receiver, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :receiver, :class => "form-control rounded-0" , :required => true
+          
+        .form-group.row
+          = f.label Setting.picks.desc, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_area :desc, :class => "form-control rounded-0", :rows => "10" 
+          
+      
+        .form-group.row
+          = f.label "一个附图", :class => "col-sm-3 col-form-label text-right"
+          .col-sm-3
+            %label.newbutton
+              = image_tag f.one_image("attch"), :class => "blah"
+              = f.file_field :attch, :accept => "image/png, image/jpeg, image/gif", :class => "select-file", :onchange => "readURL(this);"
+      
+      
+      
+      
+      
+        .form-group.row
+          .col-3.offset-3
+            = f.submit '保存', :class => "button button-action"
+        -#
+          .col-3.offset-1
+            = link_to '返回', picks_path, :class => "button button-caution"

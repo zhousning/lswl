@@ -1,0 +1,33 @@
+- provide(:title, t('.title'))
+
+.container-fluid
+  .row
+    = render "layouts/control_sidebar"
+    %main.col-md-9.ml-sm-auto.col-lg-10.p-3{:role => "main"}
+      - content_for :card_header do
+        %h5
+          = fa_icon "newspaper-o", text: t(controller_name + "." + action_name + '.title')
+          = link_to "/#{controller_name}", :class => "button pull-right button-primary" do
+            = fa_icon " chevron-left", text: Setting.systems.btn_back, right: false 
+      - content_for :card_body do
+        .container-fluid
+          .row
+            .col-md-8.offset-2
+              .card-body
+                .container-fluid
+                  .row
+                  
+                    .col-md-6.mb-3.mr-3
+                      = Setting.pick_items.count
+                      = @pick_item.count
+                  
+                  .row
+                  
+                  .row
+                  
+                  .row
+                  
+                  
+                  .row
+                  
+      = render "layouts/bootstrap/card"

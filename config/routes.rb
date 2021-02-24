@@ -138,6 +138,17 @@ Rails.application.routes.draw do
       get :output_item_create, :on => :collection
     end
   end
+  resources :projects do
+    resources :picks do
+      get :completed, :on => :member
+      get :canceled, :on => :member
+      resources :pick_items do
+        get :current_stock, :on => :collection
+        get :select_stock, :on => :collection
+        get :pick_item_create, :on => :collection
+      end
+    end
+  end
   resources :flower
 
   root :to => 'controls#index'

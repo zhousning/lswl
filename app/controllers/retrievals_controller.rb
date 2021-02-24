@@ -21,8 +21,6 @@ class RetrievalsController < ApplicationController
    
   def new
     @retrieval = Retrieval.new
-    
-    #@retrieval.output_items.build
   end
    
 

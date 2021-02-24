@@ -559,7 +559,7 @@ mysetting:
   table_pages: &62
     label: 表格页
     content: 内容
-  projects: &63
+  projects2: &137
     label: 工程项目
     name: 工程项目名称
     itemname: 分项名称，分项工程名称
@@ -624,36 +624,36 @@ mysetting:
     geo_prospect: 地勘单位
     prj_manager: 项目负责人
     status: 状态
-  project_tables: &64
+  project_tables: &63
     label: 质量规范验收表格
     category: 分类
     number: 编号
     name: 名称
     info: 说明
-  project_pages: &65
+  project_pages: &64
     label: 表格页
     content: 内容
-  labour_handles: &66
+  labour_handles: &65
     label: 项目经理
     name: 姓名
     phone: 手机
     idno: 身份证号
-  labour_teches: &67
+  labour_teches: &66
     label: 技术负责人
     name: 姓名
     phone: 手机
     idno: 身份证号
-  labour_lines: &68
+  labour_lines: &67
     label: 技术负责人
     name: 姓名
     phone: 手机
     idno: 身份证号
-  labour_workers: &69
+  labour_workers: &68
     label: 技术工人
     name: 姓名
     phone: 手机
     idno: 身份证号
-  handle_certs: &70
+  handle_certs: &69
     label: 证书
     reg_no: 注册证书编号
     cert_no: 证书编号
@@ -665,7 +665,7 @@ mysetting:
     level_b: B
     level_c: C
     level_none: 无
-  tech_certs: &71
+  tech_certs: &70
     label: 证书
     reg_no: 注册证书编号
     cert_no: 证书编号
@@ -677,7 +677,7 @@ mysetting:
     level_b: 中级
     level_c: 高级
     level_none: 无
-  line_certs: &72
+  line_certs: &71
     label: 证书
     reg_no: 注册证书编号
     cert_no: 证书编号
@@ -689,7 +689,7 @@ mysetting:
     level_b: 中级
     level_c: 高级
     level_none: 无
-  worker_certs: &73
+  worker_certs: &72
     label: 证书
     reg_no: 注册证书编号
     cert_no: 证书编号
@@ -701,11 +701,11 @@ mysetting:
     level_b: 中级
     level_c: 高级
     level_none: 无
-  handle_arcts: &74
+  handle_arcts: &73
     label: 项目经理注册专业关联表
     handle_cert_id: 项目经理外键
     arct_ctg_id: 注册建造师类别外键
-  arct_ctgs: &75
+  arct_ctgs: &74
     label: 全国注册建造师注册专业
     name: 名称
     level: 等级
@@ -713,7 +713,7 @@ mysetting:
     level_two: 贰级
     level_three: 叁级
     level_none: 无
-  skill_ctgs: &76
+  skill_ctgs: &75
     label: 全国注册建造师注册专业
     name: 名称
     level: 等级
@@ -721,13 +721,13 @@ mysetting:
     level_two: 中级
     level_three: 高级
     level_none: 无
-  prf_ctgs: &77
+  prf_ctgs: &76
     label: 住房城乡建设领域现场专业人员
     name: 名称
     level: 等级
     level_one: 土建
     level_two: 设备
-  hdct_ctgs: &78
+  hdct_ctgs: &77
     label: 专业技术等级
     name: 名称
     level: 等级
@@ -735,7 +735,7 @@ mysetting:
     level_two: 中级
     level_three: 高级
     level_none: 无
-  cert_ctgs: &79
+  cert_ctgs: &78
     label: 证书类目
     category: 证书类别
     name: 分类名称
@@ -746,110 +746,110 @@ mysetting:
     supervisor_state: 全国注册监理工程师
     supervisor_target: 专业注册监理工程师
     designer_post: 设计单位工程师
-  number_levels: &80
+  number_levels: &79
     level_one: 壹级
     level_two: 贰级
     level_three: 叁级
     level_none: 无
-  desc_levels: &81
+  desc_levels: &80
     level_one: 初级
     level_two: 中级
     level_three: 高级
     level_none: 无
-  flags: &82
+  flags: &81
     labour_handle: labour_handle
     labour_line: labour_line
     labour_tech: labour_tech
     labour_worker: labour_worker
-  constructor_handles: &83
+  constructor_handles: &82
     label: 建设单位员工
     name: 姓名
     idno: 身份证
     cpt_job: 单位职位
     prj_job: 项目职务
-  prospector_handles: &84
+  prospector_handles: &83
     label: 地勘单位员工
     name: 姓名
     idno: 身份证号
     cpt_job: 单位职务
     prj_job: 项目职务
-  monitor_handles: &85
+  monitor_handles: &84
     label: 监督单位员工
     name: 姓名
     idno: 身份证号
     cpt_job: 单位职务
     prj_job: 项目职务
-  agentor_handles: &86
+  agentor_handles: &85
     label: 代建单位员工
     name: 姓名
     phone: 电话
     idno: 身份证
     cpt_job: 单位职务
     prj_job: 项目职务
-  supervisor_states: &87
+  supervisor_states: &86
     label: 全国注册监理工程师
     name: 姓名
     phone: 电话
     idno: 身份证号码
     status: 状态
     idnumber: 识别号
-  supervisor_targets: &88
+  supervisor_targets: &87
     label: 专业注册监理工程师
     name: 姓名
     phone: 电话
     idno: 身份证号码
     status: 状态
     idnumber: 标识符
-  supervisor_workers: &89
+  supervisor_workers: &88
     label: 从业监理人员
     name: 姓名
     phone: 电话
     idno: 身份证号码
     status: 状态
     idnumber: 标识符
-  designer_structures: &90
+  designer_structures: &89
     label: 注册结构工程师
     name: 姓名
     phone: 电话
     idno: 身份证号码
     status: 状态
     idnumber: 标识符
-  designer_constructors: &91
+  designer_constructors: &90
     label: 注册建筑工程师
     name: 姓名
     phone: 电话
     idno: 身份证号码
     status: 状态
     idnumber: 标识符
-  designer_waters: &92
+  designer_waters: &91
     label: 注册给排水工程师
     name: 姓名
     phone: 电话
     idno: 身份证号码
     status: 状态
     idnumber: 标识符
-  designer_electrics: &93
+  designer_electrics: &92
     label: 注册电气工程师
     name: 名字
     phone: 电话
     idno: 身份证号码
     status: 状态
     idnumber: 标识符
-  designer_warms: &94
+  designer_warms: &93
     label: 注册暖通工程师
     name: 姓名
     phone: 电话
     idno: 身份证号码
     status: 状态
     idnumber: 标识符
-  designer_posts: &95
+  designer_posts: &94
     label: 职称工程师
     name: 姓名
     phone: 电话
     idno: 身份证号码
     status: 状态
     idnumber: 标识符
-  designer_constructor_certs: &96
+  designer_constructor_certs: &95
     label: 注册建筑工程师
     reg_no: 注册证书编号
     start: 初始注册时间
@@ -859,7 +859,7 @@ mysetting:
     status: 状态
     idnumber: 标识符
     dep: 发证单位
-  designer_structure_certs: &97
+  designer_structure_certs: &96
     label: 注册结构工程师
     reg_no: 注册证书编号
     start: 初始注册时间
@@ -868,7 +868,7 @@ mysetting:
     level: 等级
     status: 状态
     idnumber: 标识符
-  designer_water_certs: &98
+  designer_water_certs: &97
     label: 注册给排水工程师
     reg_no: 注册证书编号
     start: 初始注册时间
@@ -877,7 +877,7 @@ mysetting:
     level: 等级
     status: 状态
     idnumber: 标识符
-  designer_electric_certs: &99
+  designer_electric_certs: &98
     label: 注册电气工程师
     reg_no: 注册证书编号
     start: 初始注册时间
@@ -886,7 +886,7 @@ mysetting:
     level: 等级
     status: 状态
     idnumber: 标识符
-  designer_warm_certs: &100
+  designer_warm_certs: &99
     label: 注册暖通工程师
     reg_no: 注册证书编号
     start: 初始注册时间
@@ -895,7 +895,7 @@ mysetting:
     level: 等级
     status: 状态
     idnumber: 标识符
-  supervisor_state_certs: &101
+  supervisor_state_certs: &100
     label: 全国注册监理工程师
     reg_no: 注册证书编号
     start: 初始注册时间
@@ -904,7 +904,7 @@ mysetting:
     level: 等级
     status: 状态
     idnumber: 标识符
-  supervisor_target_certs: &102
+  supervisor_target_certs: &101
     label: 专业注册监理工程师
     reg_no: 注册证书编号
     start: 初始注册时间
@@ -913,7 +913,7 @@ mysetting:
     level: 等级
     status: 状态
     idnumber: 标识符
-  supervisor_worker_certs: &103
+  supervisor_worker_certs: &102
     label: 从业监理人员
     reg_no: 注册证书编号
     start: 初始注册时间
@@ -922,7 +922,7 @@ mysetting:
     level: 等级
     status: 状态
     idnumber: 标识符
-  designer_post_certs: &104
+  designer_post_certs: &103
     label: 职称工程师
     reg_no: 注册证书编号
     start: 初始注册时间
@@ -932,7 +932,7 @@ mysetting:
     level: 职称等级
     status: 状态
     idnumber: 标识符
-  project_groups: &105
+  project_groups: &104
     label: 项目组
     name: 名称
     status: 状态
@@ -942,12 +942,12 @@ mysetting:
     status_join: 已加入
     status_reject: 已拒绝
 defaults:
-  admins: &106
+  admins: &105
     class_name: all
     email: mytea@world.com
     phone: '15859859999'
     password: mycrystalwater
-  users: &107
+  users: &106
     class_name: User
     opening: 0
     pending: 1
@@ -966,7 +966,7 @@ defaults:
     status: 认证状态
     level: 等级
     inviter: 邀请者
-  roles: &108
+  roles: &107
     label: 角色
     name: 名称
     class_name: Role
@@ -995,13 +995,13 @@ defaults:
     prospector_handle: 地勘单位员工
     monitor: 监督单位
     monitor_handle: 监督单位员工
-  permissions: &109
+  permissions: &108
     super_admin: 管理系统所有资源
-  citrines: &110
+  citrines: &109
     exchange_max: 300
     count: 可用茶晶
     total: 茶晶总数
-  awards: &111
+  awards: &110
     ten_citrine: 10
     one_citrine: 1
   wares:
@@ -1016,10 +1016,10 @@ defaults:
     up_title: 上架
     down: 0
     down_title: 下架
-  trees: &112
+  trees: &111
     name: 名字
     count: 茶树数量
-  leafs: &113
+  leafs: &112
     produce_max: 12
     pick: 已采摘
     unpick: 未采摘
@@ -1027,7 +1027,7 @@ defaults:
     pick_time: 采摘时间
     disable: 0
     enable: 1
-  orders: &114
+  orders: &113
     category_none: none
     category_recharge: 账户充值
     paid: paid
@@ -1040,7 +1040,7 @@ defaults:
     state_trade_created_string: 已创建
     state_trade_success_string: 支付成功
     state_trade_failed_string: 支付失败
-  accounts: &115
+  accounts: &114
     coin: 金额
     password: 安全密码
     number: 卡号
@@ -1051,7 +1051,7 @@ defaults:
     award_invite_recharge: 40
     enable: enable
     disable: disable
-  consumes: &116
+  consumes: &115
     number: 消费编号
     category: 项目
     coin_cost: 消费
@@ -1072,17 +1072,17 @@ defaults:
     status_success: success
     status_failed: failed
     status_exception: exception
-  demands: &117
+  demands: &116
     price: 单价
     count: 数量
     enable: enable
     disable: disable
-  sells: &118
+  sells: &117
     price: 单价
     count: 数量
     enable: enable
     disable: disable
-  systems: &119
+  systems: &118
     poundage: 0.1
     commision: 0.1
     authc_pay: 1
@@ -1119,7 +1119,7 @@ defaults:
     pending: 待审核
     rejected: 不通过
     passed: 通过
-  trade_orders: &120
+  trade_orders: &119
     number: 订单编号
     price: 价格
     state: 状态
@@ -1139,7 +1139,7 @@ defaults:
     completed_title: 已完成
     canceled: canceled
     canceled_title: 已取消
-  extract_cashes: &121
+  extract_cashes: &120
     coin: 提取金额
     status: 状态
     pending: pending
@@ -1148,7 +1148,7 @@ defaults:
     agree_title: 同意
     disagree: disagree
     disagree_title: 不同意
-  share_pools: &122
+  share_pools: &121
     today_enter: 今日入账
     total: 月分红池总额度
     user_total: 昨日分红池总额
@@ -1158,9 +1158,9 @@ defaults:
     diamond: 昨日钻石茶主平均分红
     current_total: 分红池当月总额
     own_tea: 持茶/片所得
-  pick_records: &123
+  pick_records: &122
     number: 数量
-  trades: &124
+  trades: &123
     min: 交易最低价
     max: 交易最高价
     total_purchase: 今日总求购
@@ -1170,17 +1170,17 @@ defaults:
     end: 交易结束时间
     start_default: '09:00'
     end_default: '16:00'
-  levels: &125
+  levels: &124
     bronze: 青铜茶主
     silver: 白银茶主
     gold: 黄金茶主
     platinum: 铂金茶主
     diamond: 钻石茶主
-  teams: &126
+  teams: &125
     children: 我的直推
-  tea_prices: &127
+  tea_prices: &126
     price: 今日茶叶价
-  meter_reads: &128
+  meter_reads: &127
     label: 抄收绩效考核
     std_sm_wm: 小表标准 (元/块)
     std_big_wm: 大表标准 (元/块)
@@ -1204,10 +1204,10 @@ defaults:
     name: 姓名
     cal_date: 统计月份
     salary: 薪酬
-  products: &129
+  products: &128
     label: 产品
     name: 名称
-  file_libs: &130
+  file_libs: &129
     label: 文件库
     name: 文件名
     path: 路径
@@ -1219,33 +1219,33 @@ defaults:
     ppt: '4'
     mp4: '5'
     txt: '6'
-  archives: &131
+  archives: &130
     label: 档案库
     name: 名称
     desc: 备注
-  portfolios: &132
+  portfolios: &131
     label: 文件夹
     name: 文件夹名
-  examines: &133
+  examines: &132
     label: 考核资料自选库
     name: 名称
-  exm_items: &134
+  exm_items: &133
     label: 一级目录
     name: 一级目录名
     hierarchy: 目录树
-  agendas: &135
+  agendas: &134
     label: 日程
     title: 标题
     content: 事务内容
     worktime: 时间
-  statistics: &136
+  statistics: &135
     label: 统计
     title: 标题
     xtitle: x轴标题
     ytitle: y轴标题
     legend: 图例
     data: 数据
-  meter_standards: &137
+  meter_standards: &136
     label: 抄表标准
     std_sm_wm: 小表标准(元/块)
     std_big_wm: 大表标准(元/块)
@@ -1329,81 +1329,80 @@ development:
   constructors: *60
   table_templates: *61
   table_pages: *62
-  projects: *63
-  project_tables: *64
-  project_pages: *65
-  labour_handles: *66
-  labour_teches: *67
-  labour_lines: *68
-  labour_workers: *69
-  handle_certs: *70
-  tech_certs: *71
-  line_certs: *72
-  worker_certs: *73
-  handle_arcts: *74
-  arct_ctgs: *75
-  skill_ctgs: *76
-  prf_ctgs: *77
-  hdct_ctgs: *78
-  cert_ctgs: *79
-  number_levels: *80
-  desc_levels: *81
-  flags: *82
-  constructor_handles: *83
-  prospector_handles: *84
-  monitor_handles: *85
-  agentor_handles: *86
-  supervisor_states: *87
-  supervisor_targets: *88
-  supervisor_workers: *89
-  designer_structures: *90
-  designer_constructors: *91
-  designer_waters: *92
-  designer_electrics: *93
-  designer_warms: *94
-  designer_posts: *95
-  designer_constructor_certs: *96
-  designer_structure_certs: *97
-  designer_water_certs: *98
-  designer_electric_certs: *99
-  designer_warm_certs: *100
-  supervisor_state_certs: *101
-  supervisor_target_certs: *102
-  supervisor_worker_certs: *103
-  designer_post_certs: *104
-  project_groups: *105
-  admins: *106
-  users: *107
-  roles: *108
-  permissions: *109
-  citrines: *110
-  awards: *111
-  trees: *112
-  leafs: *113
-  orders: *114
-  accounts: *115
-  consumes: *116
-  demands: *117
-  sells: *118
-  systems: *119
-  trade_orders: *120
-  extract_cashes: *121
-  share_pools: *122
-  pick_records: *123
-  trades: *124
-  levels: *125
-  teams: *126
-  tea_prices: *127
-  meter_reads: *128
-  products: *129
-  file_libs: *130
-  archives: *131
-  portfolios: *132
-  examines: *133
-  exm_items: *134
-  agendas: *135
-  statistics: *136
-  meter_standards: *137
+  project_tables: *63
+  project_pages: *64
+  labour_handles: *65
+  labour_teches: *66
+  labour_lines: *67
+  labour_workers: *68
+  handle_certs: *69
+  tech_certs: *70
+  line_certs: *71
+  worker_certs: *72
+  handle_arcts: *73
+  arct_ctgs: *74
+  skill_ctgs: *75
+  prf_ctgs: *76
+  hdct_ctgs: *77
+  cert_ctgs: *78
+  number_levels: *79
+  desc_levels: *80
+  flags: *81
+  constructor_handles: *82
+  prospector_handles: *83
+  monitor_handles: *84
+  agentor_handles: *85
+  supervisor_states: *86
+  supervisor_targets: *87
+  supervisor_workers: *88
+  designer_structures: *89
+  designer_constructors: *90
+  designer_waters: *91
+  designer_electrics: *92
+  designer_warms: *93
+  designer_posts: *94
+  designer_constructor_certs: *95
+  designer_structure_certs: *96
+  designer_water_certs: *97
+  designer_electric_certs: *98
+  designer_warm_certs: *99
+  supervisor_state_certs: *100
+  supervisor_target_certs: *101
+  supervisor_worker_certs: *102
+  designer_post_certs: *103
+  project_groups: *104
+  admins: *105
+  users: *106
+  roles: *107
+  permissions: *108
+  citrines: *109
+  awards: *110
+  trees: *111
+  leafs: *112
+  orders: *113
+  accounts: *114
+  consumes: *115
+  demands: *116
+  sells: *117
+  systems: *118
+  trade_orders: *119
+  extract_cashes: *120
+  share_pools: *121
+  pick_records: *122
+  trades: *123
+  levels: *124
+  teams: *125
+  tea_prices: *126
+  meter_reads: *127
+  products: *128
+  file_libs: *129
+  archives: *130
+  portfolios: *131
+  examines: *132
+  exm_items: *133
+  agendas: *134
+  statistics: *135
+  meter_standards: *136
   ctg_mtrls:
     label: 材料分类
     idno: 编号
@@ -1423,11 +1422,11 @@ development:
     sign: 填写人
     ware_date: 时间
     desc: 备注
-    opening: "opening"
-    uploading: "uploading"
-    uploaded: "uploaded"
-    completed: "completed"
-    canceled: "canceled" 
+    opening: opening
+    uploading: uploading
+    uploaded: uploaded
+    completed: completed
+    canceled: canceled
   input_items:
     label: 入库项目
     unit_price: 单价
@@ -1446,53 +1445,78 @@ development:
     dept: 部门
     signer: 填写人
     receiver: 领取人
-    opening: "opening"
-    selecting: "selecting"
-    selected: "selected"
-    completed: "completed"
-    canceled: "canceled" 
+    opening: opening
+    selecting: selecting
+    selected: selected
+    completed: completed
+    canceled: canceled
   output_items:
     label: 出库项目
     count: 数量
     unit_price: 单价
     total_price: 总价
+  projects:
+    label: 工程项目
+    name: 工程名
+    start: 开始日期
+    end: 结束日期
+    state: 状态
+    ongoing: ongoing 
+    completed: completed
+  pick_items:
+    label: 领料明细
+    count: 数量
+  picks:
+    label: 领料单
+    name: 名称
+    pick_date: 领料日期
+    signer: 填写人
+    dept: 部门
+    receiver: 领料人
+    state: 状态
+    desc: 备注
+    opening: opening
+    selecting: selecting
+    selected: selected
+    completed: completed
+    canceled: canceled
 test:
-  admins: *106
-  users: *107
-  roles: *108
-  permissions: *109
-  citrines: *110
-  awards: *111
-  wares: *128
-  trees: *112
-  leafs: *113
+  admins: *105
+  users: *106
+  roles: *107
+  permissions: *108
+  citrines: *109
+  awards: *110
+  wares: *127
+  trees: *111
+  leafs: *112
   notices: *1
-  orders: *114
-  accounts: *115
-  consumes: *116
-  demands: *117
-  sells: *118
-  systems: *119
-  trade_orders: *120
-  extract_cashes: *121
-  share_pools: *122
-  pick_records: *123
-  trades: *124
-  levels: *125
-  teams: *126
-  tea_prices: *127
-  meter_reads: *128
-  products: *129
-  file_libs: *130
-  archives: *131
-  portfolios: *132
-  examines: *133
-  exm_items: *134
-  agendas: *135
-  statistics: *136
-  meter_standards: *137
+  orders: *113
+  accounts: *114
+  consumes: *115
+  demands: *116
+  sells: *117
+  systems: *118
+  trade_orders: *119
+  extract_cashes: *120
+  share_pools: *121
+  pick_records: *122
+  trades: *123
+  levels: *124
+  teams: *125
+  tea_prices: *126
+  meter_reads: *127
+  products: *128
+  file_libs: *129
+  archives: *130
+  portfolios: *131
+  examines: *132
+  exm_items: *133
+  agendas: *134
+  statistics: *135
+  meter_standards: *136
 production:
-  wares: *128
+  wares: *127
   notices: *1
   reports: *3
   models: *4
@@ -1501,7 +1525,7 @@ production:
   templates: *7
   natures: *8
   birds: *9
-  statistics: *136
+  statistics: *135
   spiders: *10
   selectors: *11
   websites: *12
@@ -1555,77 +1579,77 @@ production:
   constructors: *60
   table_templates: *61
   table_pages: *62
-  projects: *63
-  project_tables: *64
-  project_pages: *65
-  labour_handles: *66
-  labour_teches: *67
-  labour_lines: *68
-  labour_workers: *69
-  handle_certs: *70
-  tech_certs: *71
-  line_certs: *72
-  worker_certs: *73
-  handle_arcts: *74
-  arct_ctgs: *75
-  skill_ctgs: *76
-  prf_ctgs: *77
-  hdct_ctgs: *78
-  cert_ctgs: *79
-  number_levels: *80
-  desc_levels: *81
-  flags: *82
-  constructor_handles: *83
-  prospector_handles: *84
-  monitor_handles: *85
-  agentor_handles: *86
-  supervisor_states: *87
-  supervisor_targets: *88
-  supervisor_workers: *89
-  designer_structures: *90
-  designer_constructors: *91
-  designer_waters: *92
-  designer_electrics: *93
-  designer_warms: *94
-  designer_posts: *95
-  designer_constructor_certs: *96
-  designer_structure_certs: *97
-  designer_water_certs: *98
-  designer_electric_certs: *99
-  designer_warm_certs: *100
-  supervisor_state_certs: *101
-  supervisor_target_certs: *102
-  supervisor_worker_certs: *103
-  designer_post_certs: *104
-  project_groups: *105
-  admins: *106
-  users: *107
-  roles: *108
-  permissions: *109
-  citrines: *110
-  awards: *111
-  trees: *112
-  leafs: *113
-  orders: *114
-  accounts: *115
-  consumes: *116
-  demands: *117
-  sells: *118
-  systems: *119
-  trade_orders: *120
-  extract_cashes: *121
-  share_pools: *122
-  pick_records: *123
-  trades: *124
-  levels: *125
-  teams: *126
-  tea_prices: *127
-  meter_reads: *128
-  products: *129
-  file_libs: *130
-  archives: *131
-  portfolios: *132
-  examines: *133
-  exm_items: *134
-  agendas: *135
-  meter_standards: *137
+  projects: *137
+  project_tables: *63
+  project_pages: *64
+  labour_handles: *65
+  labour_teches: *66
+  labour_lines: *67
+  labour_workers: *68
+  handle_certs: *69
+  tech_certs: *70
+  line_certs: *71
+  worker_certs: *72
+  handle_arcts: *73
+  arct_ctgs: *74
+  skill_ctgs: *75
+  prf_ctgs: *76
+  hdct_ctgs: *77
+  cert_ctgs: *78
+  number_levels: *79
+  desc_levels: *80
+  flags: *81
+  constructor_handles: *82
+  prospector_handles: *83
+  monitor_handles: *84
+  agentor_handles: *85
+  supervisor_states: *86
+  supervisor_targets: *87
+  supervisor_workers: *88
+  designer_structures: *89
+  designer_constructors: *90
+  designer_waters: *91
+  designer_electrics: *92
+  designer_warms: *93
+  designer_posts: *94
+  designer_constructor_certs: *95
+  designer_structure_certs: *96
+  designer_water_certs: *97
+  designer_electric_certs: *98
+  designer_warm_certs: *99
+  supervisor_state_certs: *100
+  supervisor_target_certs: *101
+  supervisor_worker_certs: *102
+  designer_post_certs: *103
+  project_groups: *104
+  admins: *105
+  users: *106
+  roles: *107
+  permissions: *108
+  citrines: *109
+  awards: *110
+  trees: *111
+  leafs: *112
+  orders: *113
+  accounts: *114
+  consumes: *115
+  demands: *116
+  sells: *117
+  systems: *118
+  trade_orders: *119
+  extract_cashes: *120
+  share_pools: *121
+  pick_records: *122
+  trades: *123
+  levels: *124
+  teams: *125
+  tea_prices: *126
+  meter_reads: *127
+  products: *128
+  file_libs: *129
+  archives: *130
+  portfolios: *131
+  examines: *132
+  exm_items: *133
+  agendas: *134
+  meter_standards: *136

@@ -1,0 +1,56 @@
+- provide(:title, t('.title'))
+
+
+.container-fluid
+  .row
+    = render "layouts/control_sidebar"
+    %main.col-md-9.ml-sm-auto.col-lg-10.p-3{:role => "main"}
+      - content_for :card_header do
+        %h5
+          = fa_icon "list", text: t(controller_name + "." + action_name + '.title')
+          = link_to "/#{controller_name}/new", :class => "button button-small pull-right button-primary" do
+            = fa_icon "plus", text: Setting.systems.btn_new, right: false 
+      - content_for :card_body do
+        .container-fluid
+          .row
+            .col-md-12
+              %table.text-center.table-striped.table-sm{:'data-toggle' => "table", :"data-pagination"=>"true", :'data-id-table'=>"advancedTable"}
+                %thead
+                  %tr
+                    %th{:scope => "col"} #
+                  
+                    %th{:scope => "col"}
+                      = Setting.projects.name
+                    %th{:scope => "col"}
+                      = Setting.projects.start
+                    %th{:scope => "col"}
+                      = Setting.projects.end
+                    -#
+                      %th{:scope => "col"}
+                        = Setting.projects.state
+                    %th{:scope => "col"}
+                      设置
+                %tbody
+                  - @projects.each_with_index do |project, index|
+                    %tr
+                      %td{:scope => "row"}
+                        = index+1
+                    
+                      %td
+                        = project.name
+                      %td
+                        = project.start
+                      %td
+                        = project.end
+                      -#
+                        %td
+                        = project.state
+                      %td
+                        .container-fluid
+                          .row.justify-content-center
+                            = link_to "编辑", edit_project_path(project), :class => "button button-highlight button-small mr-1" 
+                            = link_to "领料单", project_picks_path(project), :class => "button button-royal button-small mr-1" 
+                            -#
+                              = link_to "详细",  project_path(project), :class => "button button-primary button-small mr-1" 
+                              = link_to "删除",  project, :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
+      = render "layouts/bootstrap/card"

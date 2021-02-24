@@ -13,12 +13,15 @@ class OutputItem < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: output_items
 #
 #  id           :integer         not null, primary key
 #  count        :integer         default("0"), not null
+#  unit_price   :float           default("0.0"), not null
+#  total_price  :float           default("0.0"), not null
 #  retrieval_id :integer
 #  stock_id     :integer
 #  created_at   :datetime        not null

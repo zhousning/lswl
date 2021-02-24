@@ -85,7 +85,7 @@
       <% end %>
         .form-group.row
           .col-3.offset-3
-            = f.submit '保存', :class => "button button-action"
+            = f.submit '保存', :class => "button  button-small button-action"
         -#
           .col-3.offset-1
-            = link_to '返回', <%= @mpu %>_path, :class => "button button-caution"
+            = link_to '返回', <%= @mpu %>_path, :class => "button button-small  button-caution"

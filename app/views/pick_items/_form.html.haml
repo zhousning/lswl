@@ -1,0 +1,29 @@
+.container-fluid
+  .row.justify-content-sm-center
+    .col-sm-12
+      = form_for @pick_item, :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
+        - if @pick_item.errors.any?
+          #error_explanation.alert.alert-danger.alert-dismissible.fade.show
+            %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+              %span{"aria-hidden" => "true"} x 
+            %h2= "#{pluralize(@pick_item.errors.count, "error")} prohibited this buyer from being saved:"
+            %ul
+              - @pick_item.errors.full_messages.each do |msg|
+                %li= msg
+      
+        .form-group.row
+          = f.label Setting.pick_items.count, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.number_field :count, :class => "form-control rounded-0" , :required => true
+          
+      
+      
+      
+      
+      
+        .form-group.row
+          .col-3.offset-3
+            = f.submit '保存', :class => "button button-action"
+        -#
+          .col-3.offset-1
+            = link_to '返回', pick_items_path, :class => "button button-caution"

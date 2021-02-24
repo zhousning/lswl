@@ -1,0 +1,97 @@
+- provide(:title, t('.title'))
+
+
+.container-fluid
+  .row
+    = render "layouts/control_sidebar"
+    %main.col-md-9.ml-sm-auto.col-lg-10.p-3{:role => "main"}
+      - content_for :card_header do
+        %h5
+          = fa_icon "list", text: "出库单明细"
+          - if @pick.pick_items.size > 0
+            %button#pick-item-save{:type => "button", :class => "button pull-right button-small button-caution mr-1"}
+              = fa_icon "save", text: "下一步", right: false 
+          = link_to edit_project_pick_path(@project, @pick), :class => "button pull-right button-small button-primary mr-1" do
+            = fa_icon " chevron-left", text: "上一步", right: false 
+          %button{:type => "button", :class => "button pull-right button-small button-royal mr-1", :"data-toggle" =>"modal", :"data-target" => "#stockModal" }
+            = fa_icon "plus", text: Setting.systems.btn_new, right: false 
+      - content_for :card_body do
+        .container-fluid
+          .row
+            .col-md-12
+              %table.text-center.table-striped.table-sm{:'data-toggle' => "table", :"data-pagination"=>"true", :'data-id-table'=>"advancedTable"}
+                %thead
+                  %tr
+                    %th{:scope => "col"} #
+                  
+                    %th.w-10{:scope => "col"}
+                      = Setting.ctg_mtrls.idno
+                    %th.w-50{:scope => "col"}
+                      = Setting.ctg_mtrls.name
+                    %th.w-10{:scope => "col"}
+                      = Setting.ctg_mtrls.model_no
+                    %th.w-10{:scope => "col"}
+                      = Setting.stocks.unit_price
+                    %th.w-10{:scope => "col"}
+                      剩余
+                    %th{:scope => "col"}
+                      = Setting.pick_items.count
+                    %th{:scope => "col"}
+                      设置
+                %tbody
+                  - @pick_items.each_with_index do |pick_item, index|
+                    %tr
+                      %td{:scope => "row"}
+                        %span.pick-item-index{:hidden => "true"}
+                          = pick_item.id
+                        = index+1
+                    
+                      %td
+                        = pick_item.stock.ctg_mtrl.idno
+                      %td
+                        = pick_item.stock.ctg_mtrl.name
+                      %td
+                        = pick_item.stock.ctg_mtrl.model_no
+                      %td
+                        = pick_item.stock.unit_price
+                      %td
+                        %span.stock-count
+                          = pick_item.stock.count
+                      %td
+                        = number_field_tag "pick_count", pick_item.count, :class => "form-control pick-count"
+                      %td
+                        .container-fluid
+                          .row.justify-content-center
+                            = link_to "删除",  project_pick_pick_item_path(@project, @pick, pick_item), :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
+      = render "layouts/bootstrap/card"
+
+#stockModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "stockModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.modal-dialog-centered.modal-xl
+    .modal-content
+      .modal-header
+        %button{:type => "button", :class =>"close", :"data-dismiss" => "modal", :"aria-label" => "Close"}
+          %span{:"aria-hidden" => "true"}
+            &times;
+      .modal-body
+        -#
+          %table.text-center.table-sm{:'data-search' => "true", :"data-click-to-select" => "true", :"data-checkbox-header" => "false", :'data-toggle' => "table", :"data-pagination"=>"true", :'data-id-table'=>"advancedTable"}
+        %table#stock-table.text-center.table-sm{:'data-search' => "true", :"data-click-to-select" => "true", :"data-checkbox-header" => "true", :'data-toggle' => "table", :"data-height" =>"460", :'data-url' => "/projects/#{@project.id}/picks/#{@pick.id}/pick_items/current_stock" }
+          
+          %thead
+            %tr
+              %th{:"data-field" => "index", "data-checkbox" => "true" }
+              %th{:"data-field" => "idno"}
+                = Setting.ctg_mtrls.idno
+              %th{:"data-field" => "name"}
+                = Setting.ctg_mtrls.name
+              %th{:"data-field" => "model_no"}
+                = Setting.ctg_mtrls.model_no
+              %th{:"data-field" => "pet_name"}
+                = Setting.ctg_mtrls.pet_name
+              %th{:"data-field" => "unit_price"}
+                = Setting.stocks.unit_price
+              %th{:"data-field" => "count"}
+                = Setting.stocks.count
+      .modal-footer
+        %button#stock-table-btn.button.button-primary{:type => "button"}
+          确定

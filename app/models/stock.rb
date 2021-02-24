@@ -7,6 +7,8 @@ class Stock < ActiveRecord::Base
 
   has_many :output_items
 
+  has_many :pick_items
+
   def add_count(num, unit_price)
     count = self.count + num
 

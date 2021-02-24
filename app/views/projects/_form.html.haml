@@ -1,0 +1,35 @@
+.container-fluid
+  .row.justify-content-sm-center
+    .col-sm-12
+      = form_for @project, :builder => WebsiteFormBuilder, :html => {:'data-parsley-validate' => true} do |f|
+        - if @project.errors.any?
+          #error_explanation.alert.alert-danger.alert-dismissible.fade.show
+            %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+              %span{"aria-hidden" => "true"} x 
+            %h2= "#{pluralize(@project.errors.count, "error")} prohibited this buyer from being saved:"
+            %ul
+              - @project.errors.full_messages.each do |msg|
+                %li= msg
+      
+        .form-group.row
+          = f.label Setting.projects.name, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :name, :class => "form-control rounded-0" , :required => true
+          
+        .form-group.row
+          = f.label Setting.projects.start, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.date_field :start, :class => "form-control rounded-0" 
+          
+        .form-group.row
+          = f.label Setting.projects.end, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.date_field :end, :class => "form-control rounded-0" 
+          
+      
+        .form-group.row
+          .col-3.offset-3
+            = f.submit '保存', :class => "button button-action"
+        -#
+          .col-3.offset-1
+            = link_to '返回', projects_path, :class => "button button-caution"

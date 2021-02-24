@@ -8,7 +8,7 @@
       - content_for :card_header do
         %h5
           = fa_icon "list", text: t(controller_name + "." + action_name + '.title')
-          = link_to "/#{controller_name}/new", :class => "button pull-right button-primary" do
+          = link_to "/#{controller_name}/new", :class => "button  button-small pull-right button-primary" do
             = fa_icon "plus", text: Setting.systems.btn_new, right: false 
       - content_for :card_body do
         .container-fluid

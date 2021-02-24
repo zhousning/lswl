@@ -7,6 +7,8 @@
         = fa_icon "diamond", text: "入库", class: "ml-4 mr-2"
       = link_to stocks_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/stock/ =~ request.path).nil? ? '' : 'sidebar-text-active' }" do
         = fa_icon "diamond", text: "库存", class: "ml-4 mr-2"
+      = link_to projects_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/stock/ =~ request.path).nil? ? '' : 'sidebar-text-active' }" do
+        = fa_icon "diamond", text: "工程用料", class: "ml-4 mr-2"
       = link_to retrievals_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/retrieval/ =~ request.path).nil? ? '' : 'sidebar-text-active' }" do
         = fa_icon "diamond", text: "出库", class: "ml-4 mr-2"
       = link_to ocrs_path, :class => "list-group-item list-group-item-action border-0 text-left pl-4 py-2  #{(/ocr/ =~ request.path).nil? ? '' : 'sidebar-text-active' }" do
