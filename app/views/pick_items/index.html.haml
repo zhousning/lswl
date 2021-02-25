@@ -7,7 +7,7 @@
     %main.col-md-9.ml-sm-auto.col-lg-10.p-3{:role => "main"}
       - content_for :card_header do
         %h5
-          = fa_icon "list", text: "出库单明细"
+          = fa_icon "list", text: "出料单明细"
           - if @pick.pick_items.size > 0
             %button#pick-item-save{:type => "button", :class => "button pull-right button-small button-caution mr-1"}
               = fa_icon "save", text: "下一步", right: false 

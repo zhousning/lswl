@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
    
   def create
     @project = Project.new(project_params)
+    @project.state = Setting.projects.ongoing
     @project.user = current_user
     if @project.save
       redirect_to projects_path
@@ -55,39 +56,38 @@ class ProjectsController < ApplicationController
     redirect_to :action => :index
   end
    
-  def completed
-    @projects = current_user.projects
-    @project = @projects.find(params[:project_id])
+  def outbound
+    @project = Project.where(:user => current_user, :id => params[:id]).first
     @picks = @project.picks
-    @picks.each do |pick|
-      @pick_items = pick.pick_items
-      unless @pick_items.blank? 
-        begin
-          Stock.transaction do
+
+    begin
+      @retrieval = Retrieval.create!(:name => @project.name, :outdate => Time.now, :dept => @project.dept, :signer => current_user.name, :state => Setting.retrievals.selected, :user => current_user, :project => @project)
+
+      @picks.each do |pick|
+        @pick_items = pick.pick_items
+        unless @pick_items.blank? 
+          OutputItem.transaction do
             @pick_items.each do |item|
-              stock = item.stock
+              @stock = item.stock
               count = item.count
-              stock.minus_count(count)
+
+              @output_item = OutputItem.where(:retrieval => @retrieval, :stock => @stock).first
+              if @output_item
+                @output_item.add_count(count)
+              else
+                @output_item = OutputItem.create!(:retrieval => @retrieval, :stock => @stock)
+                @output_item.add_count(count)
+              end
             end
           end
-          @pick.complete
-        rescue
-          flash[:warning] = "库存不足，请检查库存"
         end
       end
+      @project.outbound
+    rescue
+      flash[:warning] = "生成失败，请稍后再试"
     end
-    redirect_to pick_path(@pick)
+    redirect_to projects_path
   end
-
-  def canceled
-    @projects = current_user.projects
-    @project = @projects.find(params[:project_id])
-    @picks = @project.picks
-    @pick = @picks.find(params[:id])
-    @pick.cancel
-    redirect_to pick_path(@pick)
-  end
-  
 
   private
     def project_params

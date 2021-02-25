@@ -5,7 +5,8 @@ class OutputItem < ActiveRecord::Base
 
   belongs_to :stock
 
-  def add_count(count)
+  def add_count(my_count)
+    count = self.count + my_count
     unit_price = self.stock.unit_price
     total_price = unit_price*count.to_f
     update_attributes!(:count => count, :unit_price => unit_price, :total_price => total_price)

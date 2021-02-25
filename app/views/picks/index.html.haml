@@ -8,7 +8,9 @@
       - content_for :card_header do
         %h5
           = fa_icon "list", text: t(controller_name + "." + action_name + '.title')
-          = link_to new_project_pick_path(@project), :class => "button button-small pull-right button-primary" do
+          = link_to projects_path, :class => "button pull-right button-small button-royal mr-1" do
+            = fa_icon " chevron-left", text: "返回", right: false 
+          = link_to new_project_pick_path(@project), :class => "button button-small pull-right button-primary mr-1" do
             = fa_icon "plus", text: Setting.systems.btn_new, right: false 
       - content_for :card_body do
         .container-fluid

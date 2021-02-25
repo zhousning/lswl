@@ -1,4 +1,5 @@
 class Retrieval < ActiveRecord::Base
+  has_one :project
 
   mount_uploader :sign, EnclosureUploader
 

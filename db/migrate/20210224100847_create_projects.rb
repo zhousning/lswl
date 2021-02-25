@@ -9,6 +9,7 @@ class CreateProjects < ActiveRecord::Migration
       t.date :end
     
       t.string :state,  null: false, default: Setting.systems.default_str
+      t.string :dept,  null: false, default: Setting.systems.default_str
     
 
     

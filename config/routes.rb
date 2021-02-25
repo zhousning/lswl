@@ -139,6 +139,7 @@ Rails.application.routes.draw do
     end
   end
   resources :projects do
+    get :outbound, :on => :member
     resources :picks do
       get :completed, :on => :member
       get :canceled, :on => :member

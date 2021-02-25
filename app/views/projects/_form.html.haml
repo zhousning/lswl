@@ -26,6 +26,10 @@
           .col-sm-6
             = f.date_field :end, :class => "form-control rounded-0" 
           
+        .form-group.row
+          = f.label Setting.projects.dept, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-6
+            = f.text_field :dept, :class => "form-control rounded-0" , :required => true
       
         .form-group.row
           .col-3.offset-3

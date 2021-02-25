@@ -1461,8 +1461,9 @@ development:
     start: 开始日期
     end: 结束日期
     state: 状态
+    dept: 领料部门
     ongoing: ongoing 
-    completed: completed
+    outbound: outbound
   pick_items:
     label: 领料明细
     count: 数量

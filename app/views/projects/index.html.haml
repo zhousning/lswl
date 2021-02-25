@@ -25,9 +25,8 @@
                       = Setting.projects.start
                     %th{:scope => "col"}
                       = Setting.projects.end
-                    -#
-                      %th{:scope => "col"}
-                        = Setting.projects.state
+                    %th{:scope => "col"}
+                      = Setting.projects.state
                     %th{:scope => "col"}
                       设置
                 %tbody
@@ -42,14 +41,20 @@
                         = project.start
                       %td
                         = project.end
-                      -#
-                        %td
-                        = project.state
+                      %td
+                        - if project.state == Setting.projects.ongoing
+                          进行中
+                        - elsif project.state == Setting.projects.outbound 
+                          结算出库
                       %td
                         .container-fluid
                           .row.justify-content-center
                             = link_to "编辑", edit_project_path(project), :class => "button button-highlight button-small mr-1" 
                             = link_to "领料单", project_picks_path(project), :class => "button button-royal button-small mr-1" 
+                            - if project.state == Setting.projects.ongoing
+                              = link_to "结算出库", outbound_project_path(project), :class => "button button-primary button-small mr-1" 
+                            - elsif project.state == Setting.projects.outbound
+                              = link_to "出库单", retrieval_path(project.retrieval), :class => "button button-primary button-small mr-1" 
                             -#
                               = link_to "详细",  project_path(project), :class => "button button-primary button-small mr-1" 
                               = link_to "删除",  project, :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 
