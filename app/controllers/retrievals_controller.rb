@@ -59,6 +59,8 @@ class RetrievalsController < ApplicationController
    
   def canceled
     @retrieval.cancel
+    @project = @retrieval.project
+    @project.ongoing if @project
     redirect_to retrieval_path(@retrieval)
   end
    

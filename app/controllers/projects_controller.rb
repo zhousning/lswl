@@ -83,7 +83,8 @@ class ProjectsController < ApplicationController
         end
       end
       @project.outbound
-    rescue
+    rescue Exception => e
+      puts e.message
       flash[:warning] = "生成失败，请稍后再试"
     end
     redirect_to projects_path

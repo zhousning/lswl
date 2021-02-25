@@ -18,6 +18,8 @@ class CreateProjects < ActiveRecord::Migration
 
     
       t.references :user
+
+      t.references :retrieval
     
 
       t.timestamps null: false

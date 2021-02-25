@@ -15,12 +15,12 @@ class Project < ActiveRecord::Base
   end
 
   def ongoing 
-    update_attribute :state, Setting.retrievals.ongoing 
+    update_attribute :state, Setting.projects.ongoing 
   end
 
   def outbound 
     if ongoing?
-      update_attribute :state, Setting.retrievals.outbound
+      update_attribute :state, Setting.projects.outbound
     end
   end
 

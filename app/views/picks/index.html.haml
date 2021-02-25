@@ -10,8 +10,9 @@
           = fa_icon "list", text: t(controller_name + "." + action_name + '.title')
           = link_to projects_path, :class => "button pull-right button-small button-royal mr-1" do
             = fa_icon " chevron-left", text: "返回", right: false 
-          = link_to new_project_pick_path(@project), :class => "button button-small pull-right button-primary mr-1" do
-            = fa_icon "plus", text: Setting.systems.btn_new, right: false 
+          - if @project.state != Setting.projects.outbound
+            = link_to new_project_pick_path(@project), :class => "button button-small pull-right button-primary mr-1" do
+              = fa_icon "plus", text: Setting.systems.btn_new, right: false 
       - content_for :card_body do
         .container-fluid
           .row
@@ -31,8 +32,9 @@
                       = Setting.picks.dept
                     %th{:scope => "col"}
                       = Setting.picks.receiver
-                    %th{:scope => "col"}
-                      = Setting.picks.state
+                    -#
+                      %th{:scope => "col"}
+                        = Setting.picks.state
                     %th{:scope => "col"}
                       = Setting.picks.desc
                     %th{:scope => "col"}
@@ -53,28 +55,31 @@
                         = pick.dept
                       %td
                         = pick.receiver
-                      %td
-                        - if pick.state == Setting.picks.opening
-                          %span.text-warning
-                            = "领料单已创建"
-                        - elsif pick.state == Setting.picks.selecting
-                          %span.text-primary
-                            = "填写领料物品"
-                        - elsif pick.state == Setting.picks.selected
-                          %span.text-info
-                            = "待领料"
-                        - elsif pick.state == Setting.picks.completed
-                          %span.text-success
-                            = "已领料"
-                        - elsif pick.state == Setting.picks.canceled
-                          %span.text-danger
-                            = "已作废"
+                      -#
+                        %td
+                          - if pick.state == Setting.picks.opening
+                            %span.text-warning
+                              = "领料单已创建"
+                          - elsif pick.state == Setting.picks.selecting
+                            %span.text-primary
+                              = "填写出料物品"
+                          - elsif pick.state == Setting.picks.selected
+                            %span.text-info
+                              = "待出料"
+                          - elsif pick.state == Setting.picks.completed
+                            %span.text-success
+                              = "已出料"
+                          - elsif pick.state == Setting.picks.canceled
+                            %span.text-danger
+                              = "已作废"
                       %td
                         = pick.desc
                       %td
                         .container-fluid
                           .row.justify-content-center
-                            - if pick.state != Setting.picks.completed and pick.state != Setting.picks.canceled
+                            -#
+                              - if pick.state != Setting.picks.completed and pick.state != Setting.picks.canceled
+                            - if @project.state != Setting.projects.outbound
                               = link_to "填写", edit_project_pick_path(@project, pick), :class => "button button-highlight button-small mr-1" 
                             = link_to "详细", project_pick_path(@project, pick), :class => "button button-primary button-small mr-1" 
                             -#

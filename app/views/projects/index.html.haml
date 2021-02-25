@@ -43,18 +43,18 @@
                         = project.end
                       %td
                         - if project.state == Setting.projects.ongoing
-                          进行中
+                          工程进行中
                         - elsif project.state == Setting.projects.outbound 
-                          结算出库
+                          出库单已生成
                       %td
                         .container-fluid
                           .row.justify-content-center
                             = link_to "编辑", edit_project_path(project), :class => "button button-highlight button-small mr-1" 
                             = link_to "领料单", project_picks_path(project), :class => "button button-royal button-small mr-1" 
-                            - if project.state == Setting.projects.ongoing
-                              = link_to "结算出库", outbound_project_path(project), :class => "button button-primary button-small mr-1" 
+                            - if project.state == Setting.projects.ongoing && !project.picks.blank?
+                              = link_to "生成出库单", outbound_project_path(project), :class => "button button-primary button-small mr-1", :data => {:confirm => "出库单生成后无法修改?"}
                             - elsif project.state == Setting.projects.outbound
-                              = link_to "出库单", retrieval_path(project.retrieval), :class => "button button-primary button-small mr-1" 
+                              = link_to "出库单明细", retrieval_path(project.retrieval), :class => "button button-primary button-small mr-1" 
                             -#
                               = link_to "详细",  project_path(project), :class => "button button-primary button-small mr-1" 
                               = link_to "删除",  project, :method => :delete, :data => {:confirm => "确定删除吗?"}, :class => "button button-caution button-small" 

@@ -22,6 +22,8 @@
                     %th{:scope => "col"}
                       = Setting.retrievals.name
                     %th{:scope => "col"}
+                      工程名称
+                    %th{:scope => "col"}
                       = Setting.retrievals.outdate
                     %th{:scope => "col"}
                       = Setting.retrievals.dept
@@ -41,6 +43,11 @@
                     
                       %td
                         = retrieval.name
+                      %td
+                        - if retrieval.project
+                          = retrieval.project.name
+                        - else
+                          无
                       %td
                         = retrieval.outdate
                       %td

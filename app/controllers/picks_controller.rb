@@ -1,7 +1,7 @@
 class PicksController < ApplicationController
   layout "application_control"
   before_filter :authenticate_user!
-  #before_filter :is_can_use?, :only => [:completed, :canceled, :edit, :update]
+  before_filter :is_can_use?, :only => [:new, :create, :edit, :update]
   #load_and_authorize_resource
 
    
@@ -25,14 +25,10 @@ class PicksController < ApplicationController
 
    
   def new
-    @projects = current_user.projects
-    @project = @projects.find(params[:project_id])
     @pick = Pick.new
   end
    
   def create
-    @projects = current_user.projects
-    @project = @projects.find(params[:project_id])
     @pick = Pick.new(pick_params)
     @pick.state = Setting.picks.opening
     @pick.project = @project 
@@ -62,8 +58,6 @@ class PicksController < ApplicationController
   end
    
   def edit
-    @projects = current_user.projects
-    @project = @projects.find(params[:project_id])
     @picks = @project.picks
     @pick = @picks.find(params[:id])
   end
@@ -71,8 +65,6 @@ class PicksController < ApplicationController
 
    
   def update
-    @projects = current_user.projects
-    @project = @projects.find(params[:project_id])
     @picks = @project.picks
     @pick = @picks.find(params[:id])
     if @pick.update(pick_params)
@@ -93,20 +85,16 @@ class PicksController < ApplicationController
     redirect_to :action => :index
   end
    
-
-  
-
-  
-
   private
     def pick_params
       params.require(:pick).permit( :name, :pick_date, :signer, :dept, :receiver, :state, :desc , :attch)
     end
   
     def is_can_use?
-      @retrieval = current_user.retrievals.find(params[:id])
-      unless @retrieval.state != Setting.retrievals.completed && @retrieval.state != Setting.retrievals.canceled 
-        redirect_to retrievals_path 
+      @projects = current_user.projects
+      @project = @projects.find(params[:project_id])
+      unless @project.state != Setting.projects.outbound
+        redirect_to project_picks_path(@project) 
       end
     end
   
