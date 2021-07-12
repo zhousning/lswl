@@ -42,6 +42,8 @@ mysetting:
     form: 表单
     js: js
     scss: scss
+    download: 下载表格 
+    upload: 上传解析表格
     admin: 添加到后台
   natures: &8
     label: ''
@@ -1462,7 +1464,7 @@ development:
     end: 结束日期
     state: 状态
     dept: 领料部门
-    ongoing: ongoing 
+    ongoing: ongoing
     outbound: outbound
   pick_items:
     label: 领料明细

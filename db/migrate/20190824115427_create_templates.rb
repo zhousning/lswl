@@ -14,6 +14,8 @@ class CreateTemplates < ActiveRecord::Migration
       t.boolean :show
       t.boolean :form
       t.boolean :js
+      t.boolean :upload
+      t.boolean :download
       t.boolean :scss
       t.boolean :admin
 

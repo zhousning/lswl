@@ -27,6 +27,9 @@ class Rails::ItemGenerator < Rails::Generators::Base
   class_option :js, :aliases => '-j', :type => :boolean, :default => true 
   class_option :scss, :aliases => '-c', :type => :boolean, :default => true 
 
+  class_option :upload, :aliases => '-s', :type => :boolean, :default => true 
+  class_option :download, :aliases => '-f', :type => :boolean, :default => true 
+
   class_option :admin, :aliases => '-a', :type => :boolean, :default => true 
 
   class_option :nests, :aliases => '-z', :type => :string, :default => "" 
@@ -111,6 +114,9 @@ class Rails::ItemGenerator < Rails::Generators::Base
     @mpu = model.pluralize.underscore
     @attachment = options[:attachment]
     @one_attachment = options[:one_attachment]
+    @upload = options[:upload]
+    @download = options[:download]
+
     flower = "resources :flower"
     route_attachment = "config/routes.rb"
     route_str = "resources :" + @mpu + " do\n"
@@ -122,6 +128,17 @@ class Rails::ItemGenerator < Rails::Generators::Base
     if @one_attachment
       route_str += "    get :download_append, :on => :member\n"
     end
+
+    if @upload
+      route_str += "    post :parse_excel, :on => :collection\n"
+    end
+
+    if @download
+      route_str += "    get :xls_download, :on => :collection\n"
+    end
+
+    
+    
 
     route_str += "  end\n" + "  " + flower
 
@@ -147,6 +164,8 @@ class Rails::ItemGenerator < Rails::Generators::Base
     @form = options[:form]
     @js   = options[:js]
     @scss = options[:scss]
+    @upload   = options[:upload]
+    @download = options[:download]
     @admin = options[:admin]
     @nests = options[:nests]
     unless @nests.blank?
@@ -160,10 +179,10 @@ class Rails::ItemGenerator < Rails::Generators::Base
       @attrs << column.slice(/[^:]+/)
     end
 
-    template 'controller.template', "app/controllers/#{controller_name}_controller.rb", @attrs, @mu, @mc, @mpc, @mpu, @enclosure, @attachment, @one_enclosure, @one_attachment, @index, @new, @edit, @show, @fields
+    template 'controller.template', "app/controllers/#{controller_name}_controller.rb", @attrs, @mu, @mc, @mpc, @mpu, @enclosure, @attachment, @one_enclosure, @one_attachment, @index, @new, @edit, @show, @fields, @upload, @download
 
     if @index
-      template 'index.template', "app/views/#{controller_name}/index.html.haml", @attrs, @mu, @mc, @mpc, @mpu, @enclosure, @attachment, @one_enclosure, @one_attachment
+      template 'index.template', "app/views/#{controller_name}/index.html.haml", @attrs, @mu, @mc, @mpc, @mpu, @enclosure, @attachment, @one_enclosure, @one_attachment, @upload, @download
     end
 
     if @form

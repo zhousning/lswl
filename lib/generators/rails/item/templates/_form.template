@@ -61,7 +61,7 @@
               = f.fields_for :enclosures do |enclosure|
                 = render 'enclosure_fields', f: enclosure
               .links
-                = link_to_add_association "添加文件", f, :enclosures, :class => "button button-primary"
+                = link_to_add_association "添加文件", f, :enclosures, :class => "button button-small button-primary"
       <% end %>
       <% if @attachment %>
         .form-group.row
@@ -71,7 +71,7 @@
               = f.fields_for :attachments do |attachment|
                 = render 'attachment_fields', f: attachment
               .links
-                = link_to_add_association "添加文件", f, :attachments, :class => "button button-primary"
+                = link_to_add_association "添加文件", f, :attachments, :class => "button button-small button-primary"
       <% end %>
       <% @fields.each do |field, value| %>
         .form-group.row
@@ -81,7 +81,7 @@
               = f.fields_for :<%= field.pluralize %> do |<%= field %>|
                 = render '<%= field %>_fields', f: <%= field %> 
               .links
-                = link_to_add_association "添加", f, :<%= field.pluralize %>, :class => "button button-primary"
+                = link_to_add_association "添加", f, :<%= field.pluralize %>, :class => "button button-small button-primary"
       <% end %>
         .form-group.row
           .col-3.offset-3

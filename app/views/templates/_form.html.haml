@@ -130,6 +130,25 @@
               = f.label Setting.systems.status_no, :class => "form-check-label"
             
           
+        .form-group.row
+          = f.label Setting.templates.upload, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-3
+            .form-check.form-check-inline
+              = f.radio_button :upload, Setting.systems.status_en_yes, :class => "form-check-input", :checked => "checked"
+              = f.label Setting.systems.status_yes, :class => "form-check-label"
+            .form-check.form-check-inline
+              = f.radio_button :upload, Setting.systems.status_en_no, :class => "form-check-input"
+              = f.label Setting.systems.status_no, :class => "form-check-label"
+          
+        .form-group.row
+          = f.label Setting.templates.download, :class => "col-sm-3 col-form-label text-right"
+          .col-sm-3
+            .form-check.form-check-inline
+              = f.radio_button :download, Setting.systems.status_en_yes, :class => "form-check-input", :checked => "checked"
+              = f.label Setting.systems.status_yes, :class => "form-check-label"
+            .form-check.form-check-inline
+              = f.radio_button :download, Setting.systems.status_en_no, :class => "form-check-input"
+              = f.label Setting.systems.status_no, :class => "form-check-label"
       
       
         .form-group.row
